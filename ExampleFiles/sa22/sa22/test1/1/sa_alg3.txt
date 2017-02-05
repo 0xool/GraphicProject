@@ -1,0 +1,1 @@
+Result of SA Algorithm for tree rec2t127.ttt : 	init_time= 0 , run_time= 417812 , total_crossings= 32 , 	total_edge_len= 7328.615723 , max_edge_len= 418.478210 , edge_len_deviation= 72.527702 , 	mean_edge_len= 58.163616 , total_bends= 0 , max_bends= 0 , 	bends_deviation= 0.000000 , mean_bends= 0.000000 , min_dist= 2.000000 
