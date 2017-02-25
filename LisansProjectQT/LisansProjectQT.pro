@@ -28,12 +28,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     mesh.cpp \
     openglview.cpp \
-    openglwidget.cpp
+    openglwidget.cpp \
+    outershape.cpp \
+    innershape.cpp \
+    projectmanager.cpp
 
 HEADERS  += mainwindow.h \
     mesh.h \
     openglview.h \
-    openglwidget.h
+    openglwidget.h \
+    outershape.h \
+    innershape.h \
+    innershape.h \
+    projectmanager.h
 
 FORMS    += mainwindow.ui \
     openglview.ui

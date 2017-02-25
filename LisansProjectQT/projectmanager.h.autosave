@@ -1,0 +1,44 @@
+#ifndef PROJECTMANAGER_H
+#define PROJECTMANAGER_H
+
+#include <QString>
+#include "mesh.h"
+#include "innershape.h"
+#include "outershape.h"
+
+class ProjectManager
+{
+public:
+  
+  //getter :
+  Bool gerDebug();
+  Mesh getMesh();
+  InnerShape getInnserShape();
+  OuterShape getOuterShape();
+  
+  //setter :
+  void setDebug(Bool debug);
+  void setMesh(Mesh mesh);
+  void setInnserShape(InnerShape innerShape);
+  void setOuterShape(OuterShape outerShape);
+  
+  
+    
+  static ProjectManager& instance()
+  {
+    static ProjectManager *instance = new ProjectManager();
+    return *instance;
+  }
+
+private:
+  
+  Bool DEBUG = false;
+  Mesh _mesh;
+  InnerShape innserShape;
+  OuterShape outerShape;
+  
+  ProjectManager() {}
+
+};
+
+#endif // PROJECTMANAGER_H

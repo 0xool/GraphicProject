@@ -10,11 +10,6 @@ OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
     format.setDepthBufferSize(24);
     setFormat(format);
     QPalette pal = palette();
-
-    ProjectManager *pm;
-    QString tmp = pm->instance().DEBUG;
-    qDebug(tmp.toLatin1());
-
     // set black background
     pal.setColor(QPalette::Background, Qt::blue);
     this->setAutoFillBackground(true);
