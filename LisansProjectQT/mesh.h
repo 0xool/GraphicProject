@@ -7,6 +7,9 @@ class Mesh
 public:
     Mesh();
 
+private :
+    int x[][];
+
 };
 
 #endif // MESH_H

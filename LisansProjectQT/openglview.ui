@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>openGlView</class>
  <widget class="QDialog" name="openGlView">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,19 +17,26 @@
    <string>Dialog</string>
   </property>
   <property name="autoFillBackground">
-   <bool>false</bool>
+   <bool>true</bool>
   </property>
-  <widget class="QOpenGLWidget" name="openGLWidget">
+  <widget class="OpenGlWidget" name="openGLWidget">
    <property name="geometry">
     <rect>
-     <x>-1</x>
-     <y>-1</y>
-     <width>401</width>
-     <height>301</height>
+     <x>9</x>
+     <y>9</y>
+     <width>381</width>
+     <height>281</height>
     </rect>
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>OpenGlWidget</class>
+   <extends>QOpenGLWidget</extends>
+   <header>openglwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

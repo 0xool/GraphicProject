@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.9 $(EXPORT_QMAKE_XARCH_CFLAGS) -g -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.9 $(EXPORT_QMAKE_XARCH_CFLAGS) -g -std=gnu++11 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../LisansProjectQT -I. -I../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers -I../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt5.8.0/5.8/clang_64/mkspecs/macx-clang -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib
+INCPATH       = -I../LisansProjectQT -I. -I../../../Qt5.8.0/5.8/clang_64/lib/QtOpenGL.framework/Headers -I../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers -I../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt5.8.0/5.8/clang_64/mkspecs/macx-clang -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib
 QMAKE         = /Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = LisansProjectQT1.0.0
 DISTDIR = /Users/cyrusrefahi/Documents/LisansProject/build-LisansProjectQT-Desktop_Qt_5_8_0_clang_64bit-Debug/.tmp/LisansProjectQT1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.9 $(EXPORT_QMAKE_XARCH_LFLAGS) -Wl,-rpath,/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib -framework QtOpenGL -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -51,12 +51,14 @@ OBJECTS_DIR   = ./
 SOURCES       = ../LisansProjectQT/main.cpp \
 		../LisansProjectQT/mainwindow.cpp \
 		../LisansProjectQT/mesh.cpp \
-		../LisansProjectQT/openglview.cpp moc_mainwindow.cpp \
+		../LisansProjectQT/openglview.cpp \
+		../LisansProjectQT/openglwidget.cpp moc_mainwindow.cpp \
 		moc_openglview.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		mesh.o \
 		openglview.o \
+		openglwidget.o \
 		moc_mainwindow.o \
 		moc_openglview.o
 DIST          = ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/spec_pre.prf \
@@ -237,10 +239,12 @@ DIST          = ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.8.0/5.8/clang_64/mkspecs/features/lex.prf \
 		../LisansProjectQT/LisansProjectQT.pro ../LisansProjectQT/mainwindow.h \
 		../LisansProjectQT/mesh.h \
-		../LisansProjectQT/openglview.h ../LisansProjectQT/main.cpp \
+		../LisansProjectQT/openglview.h \
+		../LisansProjectQT/openglwidget.h ../LisansProjectQT/main.cpp \
 		../LisansProjectQT/mainwindow.cpp \
 		../LisansProjectQT/mesh.cpp \
-		../LisansProjectQT/openglview.cpp
+		../LisansProjectQT/openglview.cpp \
+		../LisansProjectQT/openglwidget.cpp
 QMAKE_TARGET  = LisansProjectQT
 DESTDIR       = 
 TARGET        = LisansProjectQT.app/Contents/MacOS/LisansProjectQT
@@ -430,6 +434,7 @@ Makefile: ../LisansProjectQT/LisansProjectQT.pro ../../../Qt5.8.0/5.8/clang_64/m
 		../../../Qt5.8.0/5.8/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt5.8.0/5.8/clang_64/mkspecs/features/lex.prf \
 		../LisansProjectQT/LisansProjectQT.pro \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtOpenGL.framework/QtOpenGL.prl \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/QtCore.prl
@@ -611,6 +616,7 @@ Makefile: ../LisansProjectQT/LisansProjectQT.pro ../../../Qt5.8.0/5.8/clang_64/m
 ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/yacc.prf:
 ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/lex.prf:
 ../LisansProjectQT/LisansProjectQT.pro:
+../../../Qt5.8.0/5.8/clang_64/lib/QtOpenGL.framework/QtOpenGL.prl:
 ../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/QtCore.prl:
@@ -644,8 +650,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.h ../LisansProjectQT/mesh.h ../LisansProjectQT/openglview.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../LisansProjectQT/main.cpp ../LisansProjectQT/mainwindow.cpp ../LisansProjectQT/mesh.cpp ../LisansProjectQT/openglview.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.h ../LisansProjectQT/mesh.h ../LisansProjectQT/openglview.h ../LisansProjectQT/openglwidget.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../LisansProjectQT/main.cpp ../LisansProjectQT/mainwindow.cpp ../LisansProjectQT/mesh.cpp ../LisansProjectQT/openglview.cpp ../LisansProjectQT/openglwidget.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.ui ../LisansProjectQT/openglview.ui $(DISTDIR)/
 
 
@@ -686,14 +692,14 @@ moc_mainwindow.cpp: ../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Header
 		../LisansProjectQT/mainwindow.h \
 		moc_predefs.h \
 		../../../Qt5.8.0/5.8/clang_64/bin/moc
-	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/mkspecs/macx-clang -I/Users/cyrusrefahi/Documents/LisansProject/LisansProjectQT -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib ../LisansProjectQT/mainwindow.h -o moc_mainwindow.cpp
+	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/mkspecs/macx-clang -I/Users/cyrusrefahi/Documents/LisansProject/LisansProjectQT -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtOpenGL.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib ../LisansProjectQT/mainwindow.h -o moc_mainwindow.cpp
 
 moc_openglview.cpp: ../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../LisansProjectQT/openglview.h \
 		moc_predefs.h \
 		../../../Qt5.8.0/5.8/clang_64/bin/moc
-	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/mkspecs/macx-clang -I/Users/cyrusrefahi/Documents/LisansProject/LisansProjectQT -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib ../LisansProjectQT/openglview.h -o moc_openglview.cpp
+	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/mkspecs/macx-clang -I/Users/cyrusrefahi/Documents/LisansProject/LisansProjectQT -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtOpenGL.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib ../LisansProjectQT/openglview.h -o moc_openglview.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -705,7 +711,16 @@ ui_mainwindow.h: ../LisansProjectQT/mainwindow.ui \
 	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/uic ../LisansProjectQT/mainwindow.ui -o ui_mainwindow.h
 
 ui_openglview.h: ../LisansProjectQT/openglview.ui \
-		../../../Qt5.8.0/5.8/clang_64/bin/uic
+		../../../Qt5.8.0/5.8/clang_64/bin/uic \
+		../LisansProjectQT/openglwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QOpenGLWidget \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qopenglwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix4x4 \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h
 	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/uic ../LisansProjectQT/openglview.ui -o ui_openglview.h
 
 compiler_rez_source_make_all:
@@ -748,8 +763,30 @@ mesh.o: ../LisansProjectQT/mesh.cpp ../LisansProjectQT/mesh.h
 openglview.o: ../LisansProjectQT/openglview.cpp ../LisansProjectQT/openglview.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_openglview.h
+		ui_openglview.h \
+		../LisansProjectQT/openglwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QOpenGLWidget \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qopenglwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix4x4 \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglview.o ../LisansProjectQT/openglview.cpp
+
+openglwidget.o: ../LisansProjectQT/openglwidget.cpp ../LisansProjectQT/openglwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QOpenGLWidget \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qopenglwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix4x4 \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglwidget.o ../LisansProjectQT/openglwidget.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

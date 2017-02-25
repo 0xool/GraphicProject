@@ -35,6 +35,12 @@ void MainWindow::on_startAlgorithmBtn_clicked()
 {
 
     openGlView OV;
+    QPalette pal = palette();
+
+    // set black background
+    pal.setColor(QPalette::Background, Qt::yellow);
+    OV.setAutoFillBackground(true);
+    OV.setPalette(pal);
     OV.setModal(true);
     OV.exec();
 

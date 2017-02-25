@@ -15,24 +15,25 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QOpenGLWidget>
+#include "openglwidget.h"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_openGlView
 {
 public:
-    QOpenGLWidget *openGLWidget;
+    OpenGlWidget *openGLWidget;
 
     void setupUi(QDialog *openGlView)
     {
         if (openGlView->objectName().isEmpty())
             openGlView->setObjectName(QStringLiteral("openGlView"));
+        openGlView->setWindowModality(Qt::WindowModal);
         openGlView->resize(400, 300);
-        openGlView->setAutoFillBackground(false);
-        openGLWidget = new QOpenGLWidget(openGlView);
+        openGlView->setAutoFillBackground(true);
+        openGLWidget = new OpenGlWidget(openGlView);
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
-        openGLWidget->setGeometry(QRect(-1, -1, 401, 301));
+        openGLWidget->setGeometry(QRect(9, 9, 381, 281));
 
         retranslateUi(openGlView);
 

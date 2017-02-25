@@ -4,12 +4,13 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = LisansProjectQT
 TEMPLATE = app
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -26,11 +27,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     mesh.cpp \
-    openglview.cpp
+    openglview.cpp \
+    openglwidget.cpp
 
 HEADERS  += mainwindow.h \
     mesh.h \
-    openglview.h
+    openglview.h \
+    openglwidget.h
 
 FORMS    += mainwindow.ui \
     openglview.ui
