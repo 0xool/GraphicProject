@@ -2,11 +2,27 @@
 #define PROJECTMANAGER_H
 
 #include <QString>
+#include "mesh.h"
+#include "innershape.h"
+#include "outershape.h"
 
 class ProjectManager
 {
 public:
-   QString DEBUG = "true";
+
+  //getter :
+  bool getDebug();
+  Mesh getMesh();
+  InnerShape getInnserShape();
+  OuterShape getOuterShape();
+
+  //setter :
+  void setDebug(bool debug);
+  void setMesh(Mesh mesh);
+  void setInnserShape(InnerShape innerShape);
+  void setOuterShape(OuterShape outerShape);
+
+
 
   static ProjectManager& instance()
   {
@@ -15,6 +31,12 @@ public:
   }
 
 private:
+
+  bool DEBUG = false;
+  Mesh mesh;
+  InnerShape innerShape;
+  OuterShape outerShape;
+
   ProjectManager() {}
 
 };

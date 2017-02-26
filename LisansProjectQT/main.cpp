@@ -7,7 +7,8 @@ int main(int argc, char *argv[])
 {
 
     ProjectManager *pm;
-    pm->instance().DEBUG = "false";
+    pm->instance().setDebug(true);
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
