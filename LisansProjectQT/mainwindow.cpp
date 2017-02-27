@@ -7,6 +7,10 @@
 #include "QFileDialog"
 
 #include "openglview.h"
+#include "mesh.h"
+#include "projectmanager.h"
+
+#include "outershapeuserinput.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,12 +21,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox->addItem("SA");
 }
 
+//================================================================================================================================================
 MainWindow::~MainWindow()
 {
 
     delete ui;
 }
 
+//================================================================================================================================================
 void MainWindow::on_ExitBtn_clicked()
 {
 
@@ -30,7 +36,7 @@ void MainWindow::on_ExitBtn_clicked()
 
 }
 
-
+//================================================================================================================================================
 void MainWindow::on_startAlgorithmBtn_clicked()
 {
 
@@ -46,6 +52,7 @@ void MainWindow::on_startAlgorithmBtn_clicked()
 
 }
 
+//================================================================================================================================================
 void MainWindow::on_getGraphBtn_clicked()
 {
 
@@ -59,12 +66,21 @@ void MainWindow::on_getGraphBtn_clicked()
                 return;
             }
             QTextStream in(&file);
-            ui->graphTextEdit->setText(in.readAll());
+
+            QString fileText = in.readAll();
+
+            ProjectManager *pm;
+            Mesh mesh = pm->instance().getMesh();
+            mesh.setMeshText(fileText);
+            pm->instance().setMesh(mesh);
+
+            ui->graphTextEdit->setText(fileText);
             file.close();
         }
 
 }
 
+//================================================================================================================================================
 void MainWindow::on_getShapedBtn_clicked()
 {
 
@@ -78,8 +94,50 @@ void MainWindow::on_getShapedBtn_clicked()
                 return;
             }
             QTextStream in(&file);
-            ui->shapeTextEdit->setText(in.readAll());
+
+            QString fileText = in.readAll();
+
+            ProjectManager *pm;
+            OuterShape outerShape = pm->instance().getOuterShape();
+            outerShape.setOuterShapeText(fileText);
+            pm->instance().setOuterShape(outerShape);
+
+
+            ui->shapeTextEdit->setText(fileText);
             file.close();
         }
+
+}
+
+//================================================================================================================================================
+void MainWindow::parseInnerShapeData(QString text)
+{
+
+
+
+
+}
+
+//================================================================================================================================================
+void MainWindow::parseMeshData(QString text)
+{
+
+
+
+
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+    OuterShapeUserInput OV;
+    QPalette pal = palette();
+
+    // set black background
+    pal.setColor(QPalette::Background, Qt::white);
+    OV.setAutoFillBackground(true);
+    OV.setPalette(pal);
+    OV.setModal(true);
+    OV.exec();
 
 }

@@ -55,8 +55,11 @@ SOURCES       = ../LisansProjectQT/main.cpp \
 		../LisansProjectQT/openglwidget.cpp \
 		../LisansProjectQT/outershape.cpp \
 		../LisansProjectQT/innershape.cpp \
-		../LisansProjectQT/projectmanager.cpp moc_mainwindow.cpp \
-		moc_openglview.cpp
+		../LisansProjectQT/projectmanager.cpp \
+		../LisansProjectQT/outershapeuserinput.cpp \
+		../LisansProjectQT/outershapeinputopengl.cpp moc_mainwindow.cpp \
+		moc_openglview.cpp \
+		moc_outershapeuserinput.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		mesh.o \
@@ -65,8 +68,11 @@ OBJECTS       = main.o \
 		outershape.o \
 		innershape.o \
 		projectmanager.o \
+		outershapeuserinput.o \
+		outershapeinputopengl.o \
 		moc_mainwindow.o \
-		moc_openglview.o
+		moc_openglview.o \
+		moc_outershapeuserinput.o
 DIST          = ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt5.8.0/5.8/clang_64/mkspecs/qdevice.pri \
 		../../../Qt5.8.0/5.8/clang_64/mkspecs/features/device_config.prf \
@@ -250,14 +256,18 @@ DIST          = ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		../LisansProjectQT/outershape.h \
 		../LisansProjectQT/innershape.h \
 		../LisansProjectQT/innershape.h \
-		../LisansProjectQT/projectmanager.h ../LisansProjectQT/main.cpp \
+		../LisansProjectQT/projectmanager.h \
+		../LisansProjectQT/outershapeuserinput.h \
+		../LisansProjectQT/outershapeinputopengl.h ../LisansProjectQT/main.cpp \
 		../LisansProjectQT/mainwindow.cpp \
 		../LisansProjectQT/mesh.cpp \
 		../LisansProjectQT/openglview.cpp \
 		../LisansProjectQT/openglwidget.cpp \
 		../LisansProjectQT/outershape.cpp \
 		../LisansProjectQT/innershape.cpp \
-		../LisansProjectQT/projectmanager.cpp
+		../LisansProjectQT/projectmanager.cpp \
+		../LisansProjectQT/outershapeuserinput.cpp \
+		../LisansProjectQT/outershapeinputopengl.cpp
 QMAKE_TARGET  = LisansProjectQT
 DESTDIR       = 
 TARGET        = LisansProjectQT.app/Contents/MacOS/LisansProjectQT
@@ -266,7 +276,7 @@ TARGET        = LisansProjectQT.app/Contents/MacOS/LisansProjectQT
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_openglview.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_openglview.h ui_outershapeuserinput.h $(OBJECTS)  
 	@test -d LisansProjectQT.app/Contents/MacOS/ || mkdir -p LisansProjectQT.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -663,9 +673,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.h ../LisansProjectQT/mesh.h ../LisansProjectQT/openglview.h ../LisansProjectQT/openglwidget.h ../LisansProjectQT/outershape.h ../LisansProjectQT/innershape.h ../LisansProjectQT/innershape.h ../LisansProjectQT/projectmanager.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../LisansProjectQT/main.cpp ../LisansProjectQT/mainwindow.cpp ../LisansProjectQT/mesh.cpp ../LisansProjectQT/openglview.cpp ../LisansProjectQT/openglwidget.cpp ../LisansProjectQT/outershape.cpp ../LisansProjectQT/innershape.cpp ../LisansProjectQT/projectmanager.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.ui ../LisansProjectQT/openglview.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.h ../LisansProjectQT/mesh.h ../LisansProjectQT/openglview.h ../LisansProjectQT/openglwidget.h ../LisansProjectQT/outershape.h ../LisansProjectQT/innershape.h ../LisansProjectQT/innershape.h ../LisansProjectQT/projectmanager.h ../LisansProjectQT/outershapeuserinput.h ../LisansProjectQT/outershapeinputopengl.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../LisansProjectQT/main.cpp ../LisansProjectQT/mainwindow.cpp ../LisansProjectQT/mesh.cpp ../LisansProjectQT/openglview.cpp ../LisansProjectQT/openglwidget.cpp ../LisansProjectQT/outershape.cpp ../LisansProjectQT/innershape.cpp ../LisansProjectQT/projectmanager.cpp ../LisansProjectQT/outershapeuserinput.cpp ../LisansProjectQT/outershapeinputopengl.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.ui ../LisansProjectQT/openglview.ui ../LisansProjectQT/outershapeuserinput.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -697,9 +707,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.9 $(EXPORT_QMAKE_XARCH_CFLAGS) -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_openglview.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_openglview.cpp moc_outershapeuserinput.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_openglview.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_openglview.cpp moc_outershapeuserinput.cpp
 moc_mainwindow.cpp: ../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../LisansProjectQT/mainwindow.h \
@@ -714,11 +724,18 @@ moc_openglview.cpp: ../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Header
 		../../../Qt5.8.0/5.8/clang_64/bin/moc
 	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/mkspecs/macx-clang -I/Users/cyrusrefahi/Documents/LisansProject/LisansProjectQT -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtOpenGL.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib ../LisansProjectQT/openglview.h -o moc_openglview.cpp
 
+moc_outershapeuserinput.cpp: ../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../LisansProjectQT/outershapeuserinput.h \
+		moc_predefs.h \
+		../../../Qt5.8.0/5.8/clang_64/bin/moc
+	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/mkspecs/macx-clang -I/Users/cyrusrefahi/Documents/LisansProject/LisansProjectQT -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtOpenGL.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers -I/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/lib ../LisansProjectQT/outershapeuserinput.h -o moc_outershapeuserinput.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_openglview.h
+compiler_uic_make_all: ui_mainwindow.h ui_openglview.h ui_outershapeuserinput.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_openglview.h
+	-$(DEL_FILE) ui_mainwindow.h ui_openglview.h ui_outershapeuserinput.h
 ui_mainwindow.h: ../LisansProjectQT/mainwindow.ui \
 		../../../Qt5.8.0/5.8/clang_64/bin/uic
 	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/uic ../LisansProjectQT/mainwindow.ui -o ui_mainwindow.h
@@ -731,10 +748,12 @@ ui_openglview.h: ../LisansProjectQT/openglview.ui \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix4x4 \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h
 	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/uic ../LisansProjectQT/openglview.ui -o ui_openglview.h
+
+ui_outershapeuserinput.h: ../LisansProjectQT/outershapeuserinput.ui \
+		../../../Qt5.8.0/5.8/clang_64/bin/uic
+	/Users/cyrusrefahi/Qt5.8.0/5.8/clang_64/bin/uic ../LisansProjectQT/outershapeuserinput.ui -o ui_outershapeuserinput.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -752,7 +771,15 @@ main.o: ../LisansProjectQT/main.cpp ../LisansProjectQT/mainwindow.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../LisansProjectQT/projectmanager.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../LisansProjectQT/mesh.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix2x2 \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../LisansProjectQT/innershape.h \
+		../LisansProjectQT/outershape.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../LisansProjectQT/main.cpp
 
 mainwindow.o: ../LisansProjectQT/mainwindow.cpp ../LisansProjectQT/mainwindow.h \
@@ -767,12 +794,22 @@ mainwindow.o: ../LisansProjectQT/mainwindow.cpp ../LisansProjectQT/mainwindow.h 
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../LisansProjectQT/openglview.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../LisansProjectQT/mesh.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix2x2 \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../LisansProjectQT/projectmanager.h \
+		../LisansProjectQT/innershape.h \
+		../LisansProjectQT/outershape.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../LisansProjectQT/mainwindow.cpp
 
 mesh.o: ../LisansProjectQT/mesh.cpp ../LisansProjectQT/mesh.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix2x2 \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mesh.o ../LisansProjectQT/mesh.cpp
 
 openglview.o: ../LisansProjectQT/openglview.cpp ../LisansProjectQT/openglview.h \
@@ -785,9 +822,7 @@ openglview.o: ../LisansProjectQT/openglview.cpp ../LisansProjectQT/openglview.h 
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix4x4 \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglview.o ../LisansProjectQT/openglview.cpp
 
 openglwidget.o: ../LisansProjectQT/openglwidget.cpp ../LisansProjectQT/openglwidget.h \
@@ -797,18 +832,25 @@ openglwidget.o: ../LisansProjectQT/openglwidget.cpp ../LisansProjectQT/openglwid
 		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix4x4 \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qmatrix4x4.h \
 		../LisansProjectQT/mesh.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix2x2 \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../LisansProjectQT/projectmanager.h \
+		../LisansProjectQT/innershape.h \
+		../LisansProjectQT/outershape.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qevent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o openglwidget.o ../LisansProjectQT/openglwidget.cpp
 
 outershape.o: ../LisansProjectQT/outershape.cpp ../LisansProjectQT/outershape.h \
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix2x2 \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o outershape.o ../LisansProjectQT/outershape.cpp
 
 innershape.o: ../LisansProjectQT/innershape.cpp ../LisansProjectQT/innershape.h \
@@ -816,14 +858,39 @@ innershape.o: ../LisansProjectQT/innershape.cpp ../LisansProjectQT/innershape.h 
 		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o innershape.o ../LisansProjectQT/innershape.cpp
 
-projectmanager.o: ../LisansProjectQT/projectmanager.cpp ../LisansProjectQT/projectmanager.h
+projectmanager.o: ../LisansProjectQT/projectmanager.cpp ../LisansProjectQT/projectmanager.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../LisansProjectQT/mesh.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix2x2 \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h \
+		../LisansProjectQT/innershape.h \
+		../LisansProjectQT/outershape.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o projectmanager.o ../LisansProjectQT/projectmanager.cpp
+
+outershapeuserinput.o: ../LisansProjectQT/outershapeuserinput.cpp ../LisansProjectQT/outershapeuserinput.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		ui_outershapeuserinput.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o outershapeuserinput.o ../LisansProjectQT/outershapeuserinput.cpp
+
+outershapeinputopengl.o: ../LisansProjectQT/outershapeinputopengl.cpp ../LisansProjectQT/outershapeinputopengl.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QOpenGLWidget \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qopenglwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QOpenGLFunctions \
+		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qopenglfunctions.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o outershapeinputopengl.o ../LisansProjectQT/outershapeinputopengl.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
 moc_openglview.o: moc_openglview.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_openglview.o moc_openglview.cpp
+
+moc_outershapeuserinput.o: moc_outershapeuserinput.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_outershapeuserinput.o moc_outershapeuserinput.cpp
 
 ####### Install
 

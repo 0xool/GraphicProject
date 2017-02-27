@@ -1,10 +1,12 @@
-#include "openglwidget.h"
+#include "outershapeinputopengl.h"
 #include "mesh.h"
 #include "projectmanager.h"
 #include <QDebug>
 #include <QMouseEvent>
 
-OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
+
+
+OuterShapeInputOpenGL::OuterShapeInputOpenGL(QWidget *parnet) : QOpenGLWidget(parnet)
 {
 
     QSurfaceFormat format;
@@ -20,7 +22,7 @@ OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
 
 //==========================================================================================================================================
 
-OpenGlWidget::~OpenGlWidget()
+OuterShapeInputOpenGL::~OuterShapeInputOpenGL()
 {
 
 
@@ -28,14 +30,14 @@ OpenGlWidget::~OpenGlWidget()
 
 //==========================================================================================================================================
 
-void OpenGlWidget::initializeGL(){
+void OuterShapeInputOpenGL::initializeGL(){
 
     glClearColor(0,0,0,1);
 
 }
 //==========================================================================================================================================
 
-void OpenGlWidget::resizeGL(int w, int h)
+void OuterShapeInputOpenGL::resizeGL(int w, int h)
 {
 
     glViewport(0,0,w,h);
@@ -51,22 +53,10 @@ void OpenGlWidget::resizeGL(int w, int h)
 }
 //==========================================================================================================================================
 
-void OpenGlWidget::paintGL()
+void OuterShapeInputOpenGL::paintGL()
 {
 
     glClear(GL_COLOR_BUFFER_BIT);
-
-        glBegin(GL_LINES);
-            glColor3f(1.0, 0.0, 0.0);
-            glVertex2f(-50, -50);
-
-            glVertex2f( 100, 150);
-
-            glVertex2f(0 , 0);
-            glVertex2f( 200,  200);
-        glEnd();
-
-
 
         glEnableClientState(GL_VERTEX_ARRAY);
         glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
@@ -78,7 +68,7 @@ void OpenGlWidget::paintGL()
 
 }
 
-void OpenGlWidget::mousePressEvent(QMouseEvent *event)
+void OuterShapeInputOpenGL::mousePressEvent(QMouseEvent *event)
 {
     int testX = mapFromGlobal(QCursor::pos()).x();
     int testY = mapFromGlobal(QCursor::pos()).y();

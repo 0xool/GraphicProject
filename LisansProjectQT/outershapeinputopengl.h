@@ -1,5 +1,5 @@
-#ifndef OPENGLWIDGET_H
-#define OPENGLWIDGET_H
+#ifndef OUTERSHAPEINPUTOPENGL_H
+#define OUTERSHAPEINPUTOPENGL_H
 
 #include <QOpenGLWidget>
 #include <QWidget>
@@ -8,13 +8,12 @@
 #include <OpenGL/gl.h>
 #include <vector>
 
-class OpenGlWidget : public QOpenGLWidget
+class OuterShapeInputOpenGL : public QOpenGLWidget
 {
 
-
 public:
-    OpenGlWidget(QWidget *parent = 0);
-    ~OpenGlWidget();
+    OuterShapeInputOpenGL(QWidget *parent = 0);
+    ~OuterShapeInputOpenGL();
 
 protected:
     void initializeGL();
@@ -30,4 +29,4 @@ private:
 
 };
 
-#endif // OPENGLWIDGET_H
+#endif // OUTERSHAPEINPUTOPENGL_H

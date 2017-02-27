@@ -6,6 +6,9 @@
 #include "innershape.h"
 #include "outershape.h"
 
+//
+//Summary : This class is singleton implemenation of the project only one instance of this class exists only for managing this project
+//
 class ProjectManager
 {
 public:

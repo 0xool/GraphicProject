@@ -28,12 +28,12 @@ public:
     {
         if (openGlView->objectName().isEmpty())
             openGlView->setObjectName(QStringLiteral("openGlView"));
-        openGlView->setWindowModality(Qt::WindowModal);
-        openGlView->resize(400, 300);
+        openGlView->setWindowModality(Qt::ApplicationModal);
+        openGlView->resize(800, 400);
         openGlView->setAutoFillBackground(true);
         openGLWidget = new OpenGlWidget(openGlView);
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
-        openGLWidget->setGeometry(QRect(9, 9, 381, 281));
+        openGLWidget->setGeometry(QRect(-1, -1, 801, 400));
 
         retranslateUi(openGlView);
 

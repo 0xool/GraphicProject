@@ -16,6 +16,7 @@ public:
     ~MainWindow();
 
 private slots:
+
     void on_ExitBtn_clicked();
 
     void on_startAlgorithmBtn_clicked();
@@ -23,6 +24,12 @@ private slots:
     void on_getGraphBtn_clicked();
 
     void on_getShapedBtn_clicked();
+
+    void parseMeshData(QString text);
+
+    void parseInnerShapeData(QString text);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

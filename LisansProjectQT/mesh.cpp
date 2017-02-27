@@ -23,5 +23,14 @@ void Mesh::parseMesh(){
 
 }
 
+void Mesh::setMeshText(QString text)
+{
+    this->meshText = text;
+}
+
+QString Mesh::getMeshText()
+{
+    return this->meshText;
+}
 
 

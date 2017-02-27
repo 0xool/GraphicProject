@@ -45,6 +45,7 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QTextEdit *graphTextEdit;
     QPushButton *getGraphBtn;
+    QPushButton *pushButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -118,6 +119,9 @@ public:
 
         horizontalLayout_3->addWidget(getGraphBtn);
 
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(20, 20, 113, 32));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -147,6 +151,7 @@ public:
         label->setText(QApplication::translate("MainWindow", "\331\206\331\210\330\271 \330\247\331\204\332\257\331\210\330\261\333\214\330\252\331\205", Q_NULLPTR));
         getShapedBtn->setText(QApplication::translate("MainWindow", "\330\257\330\261\333\214\330\247\331\201\330\252 \331\201\330\247\333\214\331\204 \332\206\331\206\330\257 \330\266\331\204\330\271\333\214", Q_NULLPTR));
         getGraphBtn->setText(QApplication::translate("MainWindow", "\330\257\330\261\333\214\330\247\331\201\330\252 \331\201\330\247\333\214\331\204 \332\257\330\261\330\247\331\201", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainWindow", "\330\261\330\263\331\205 \330\264\332\251\331\204", Q_NULLPTR));
     } // retranslateUi
 
 };
