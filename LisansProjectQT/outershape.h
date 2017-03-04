@@ -1,7 +1,7 @@
 #ifndef OUTERSHAPE_H
 #define OUTERSHAPE_H
 
-#include <QMatrix2x2>
+#include <vector>
 #include <QString>
 
 class OuterShape
@@ -11,16 +11,16 @@ public:
     OuterShape();
 
 
-    void setShapeMatrix(QMatrix2x2 shape);
+    void setShapeMatrix(std::vector<float> shape);
     void setOuterShapeText(QString text);
 
     QString getOuterShapeText();
-    QMatrix2x2 getShapeMatrix();
+    std::vector<float> getShapeMatrix();
 
 private:
 
     QString outerShapeText;
-    QMatrix2x2 shape;
+    std::vector<float> shape;
 
 };
 

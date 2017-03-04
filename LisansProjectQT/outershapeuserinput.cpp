@@ -18,6 +18,6 @@ OuterShapeUserInput::~OuterShapeUserInput()
 void OuterShapeUserInput::on_pushButton_pressed()
 {
 
-    QCoreApplication::quit();
+    this->close();
 
 }

@@ -79,6 +79,11 @@ void OuterShapeInputOpenGL::mousePressEvent(QMouseEvent *event)
 
 
     qDebug() << testX << "  " << testY;
+
+   ProjectManager *pm;
+   OuterShape OS = pm->instance().getOuterShape();
+   OS.setShapeMatrix(this->dataVector);
+   pm->instance().setOuterShape(OS);
     update();
 
     for (float &f : this->dataVector){

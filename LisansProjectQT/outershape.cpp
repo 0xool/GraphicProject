@@ -6,13 +6,13 @@ OuterShape::OuterShape()
 }
 
 //================================================================================================================================================
-QMatrix2x2 OuterShape::getShapeMatrix()
+std::vector<float> OuterShape::getShapeMatrix()
 {
     return this->shape;
 }
 
 //================================================================================================================================================
-void OuterShape::setShapeMatrix(QMatrix2x2 shapeMatrix)
+void OuterShape::setShapeMatrix(std::vector<float> shapeMatrix)
 {
 
     this->shape = shapeMatrix;

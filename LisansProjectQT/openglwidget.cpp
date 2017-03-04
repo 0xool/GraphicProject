@@ -68,13 +68,17 @@ void OpenGlWidget::paintGL()
 
 
 
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
-        float tmp[60];
-        std::copy(this->dataVector.begin() , this->dataVector.end() , tmp);
-        glVertexPointer(2 , GL_FLOAT , 0 , tmp);
-        glDrawArrays(GL_POLYGON , 0 , this->dataVector.size() / 2);
-        glDisableClientState(GL_VERTEX_ARRAY);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
+            float tmp[60];
+            ProjectManager *pm;
+            this->dataVector = pm->instance().getOuterShape().getShapeMatrix();
+            std::copy(this->dataVector.begin() , this->dataVector.end() , tmp);
+            glVertexPointer(2 , GL_FLOAT , 0 , tmp);
+            glDrawArrays(GL_POLYGON , 0 , this->dataVector.size() / 2);
+            glDisableClientState(GL_VERTEX_ARRAY);
 
 }
 

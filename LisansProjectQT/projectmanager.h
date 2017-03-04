@@ -25,8 +25,7 @@ public:
   void setInnserShape(InnerShape innerShape);
   void setOuterShape(OuterShape outerShape);
 
-
-
+  //singleton implimantation
   static ProjectManager& instance()
   {
     static ProjectManager *instance = new ProjectManager();
