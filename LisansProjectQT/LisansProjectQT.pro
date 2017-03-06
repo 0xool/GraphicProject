@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     innershape.cpp \
     projectmanager.cpp \
     outershapeuserinput.cpp \
-    outershapeinputopengl.cpp
+    outershapeinputopengl.cpp \
+    node.cpp
 
 HEADERS  += mainwindow.h \
     mesh.h \
@@ -44,7 +45,8 @@ HEADERS  += mainwindow.h \
     innershape.h \
     projectmanager.h \
     outershapeuserinput.h \
-    outershapeinputopengl.h
+    outershapeinputopengl.h \
+    node.h
 
 FORMS    += mainwindow.ui \
     openglview.ui \

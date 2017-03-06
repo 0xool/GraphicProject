@@ -30,13 +30,13 @@ public:
     {
         if (OuterShapeUserInput->objectName().isEmpty())
             OuterShapeUserInput->setObjectName(QStringLiteral("OuterShapeUserInput"));
-        OuterShapeUserInput->resize(500, 500);
+        OuterShapeUserInput->resize(800, 450);
         openGLWidget = new OuterShapeInputOpenGL(OuterShapeUserInput);
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
-        openGLWidget->setGeometry(QRect(-1, -1, 501, 441));
+        openGLWidget->setGeometry(QRect(-1, -1, 800, 400));
         pushButton = new QPushButton(OuterShapeUserInput);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(200, 460, 121, 32));
+        pushButton->setGeometry(QRect(340, 410, 121, 32));
 
         retranslateUi(OuterShapeUserInput);
 

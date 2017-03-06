@@ -5,23 +5,41 @@ InnerShape::InnerShape()
 
 }
 
-void InnerShape::setInnerShapes(QMatrix2x2 shapes[])
+std::vector<std::vector<float>> InnerShape::getShapes()
 {
 
-    memcpy(this->shapes , shapes , sizeof(this->shapes));
+    return this->innerShapes;
 
 }
 
-QMatrix2x2 InnerShape::getInnerShapes(int index)
+std::vector<float> InnerShape::getShapeByIndex(int index)
 {
 
-    return this->shapes[index];
+    return this->innerShapes[index];
 
 }
 
-QMatrix2x2 InnerShape::getInnserShapeByIndex(int index)
+void InnerShape::addShapeListToInnerShape(std::vector<float> shapeList)
 {
 
-    return this->shapes[index];
+    this->innerShapes.push_back(shapeList);
+
+}
+
+void InnerShape::addShapeToInnerShape(int vectorNumber, float x, float y)
+{
+
+    std::vector<float> tmp = this->innerShapes[vectorNumber];
+    tmp.push_back(x);
+    tmp.push_back(y);
+
+    this->innerShapes[vectorNumber] = tmp;
+
+}
+
+void InnerShape::setInnerShapes(std::vector<std::vector<float> > shapes)
+{
+
+    this->innerShapes = shapes;
 
 }
