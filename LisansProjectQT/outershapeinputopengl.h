@@ -25,7 +25,6 @@ protected:
 private:
 
     std::vector<float> dataVector;
-    float testData[60];
 
 };
 

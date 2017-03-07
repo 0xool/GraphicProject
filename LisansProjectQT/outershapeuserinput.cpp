@@ -7,14 +7,12 @@ OuterShapeUserInput::OuterShapeUserInput(QWidget *parent) :
 {
     ui->setupUi(this);
 }
-
+//==========================================================================================================================================
 OuterShapeUserInput::~OuterShapeUserInput()
 {
     delete ui;
 }
-
-
-
+//==========================================================================================================================================
 void OuterShapeUserInput::on_pushButton_pressed()
 {
 

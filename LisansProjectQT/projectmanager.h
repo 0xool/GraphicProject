@@ -23,7 +23,9 @@ public:
   void setDebug(bool debug);
   void setMesh(Mesh mesh);
   void setInnserShape(InnerShape innerShape);
+
   void setOuterShape(OuterShape outerShape);
+
 
   //singleton implimantation
   static ProjectManager& instance()

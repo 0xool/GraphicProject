@@ -7,7 +7,7 @@ openGlView::openGlView(QWidget *parent) :
 {
     ui->setupUi(this);
 }
-
+//=============================================================================================================================
 openGlView::~openGlView()
 {
     delete ui;

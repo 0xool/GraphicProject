@@ -50,7 +50,6 @@ void OpenGlWidget::resizeGL(int w, int h)
 
 }
 //==========================================================================================================================================
-
 void OpenGlWidget::paintGL()
 {
 
@@ -81,7 +80,7 @@ void OpenGlWidget::paintGL()
             glDisableClientState(GL_VERTEX_ARRAY);
 
 }
-
+//==========================================================================================================================================
 void OpenGlWidget::mousePressEvent(QMouseEvent *event)
 {
     int testX = mapFromGlobal(QCursor::pos()).x();

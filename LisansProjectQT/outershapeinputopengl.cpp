@@ -52,7 +52,6 @@ void OuterShapeInputOpenGL::resizeGL(int w, int h)
 
 }
 //==========================================================================================================================================
-
 void OuterShapeInputOpenGL::paintGL()
 {
 
@@ -67,7 +66,7 @@ void OuterShapeInputOpenGL::paintGL()
         glDisableClientState(GL_VERTEX_ARRAY);
 
 }
-
+//==========================================================================================================================================
 void OuterShapeInputOpenGL::mousePressEvent(QMouseEvent *event)
 {
     int testX = mapFromGlobal(QCursor::pos()).x();
