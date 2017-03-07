@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     projectmanager.cpp \
     outershapeuserinput.cpp \
     outershapeinputopengl.cpp \
-    node.cpp
+    node.cpp \
+    anealalgorithm.cpp
 
 HEADERS  += mainwindow.h \
     mesh.h \
@@ -46,7 +47,8 @@ HEADERS  += mainwindow.h \
     projectmanager.h \
     outershapeuserinput.h \
     outershapeinputopengl.h \
-    node.h
+    node.h \
+    anealalgorithm.h
 
 FORMS    += mainwindow.ui \
     openglview.ui \
