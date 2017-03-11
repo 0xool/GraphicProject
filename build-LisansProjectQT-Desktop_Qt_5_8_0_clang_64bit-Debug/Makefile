@@ -58,7 +58,8 @@ SOURCES       = ../LisansProjectQT/main.cpp \
 		../LisansProjectQT/projectmanager.cpp \
 		../LisansProjectQT/outershapeuserinput.cpp \
 		../LisansProjectQT/outershapeinputopengl.cpp \
-		../LisansProjectQT/node.cpp moc_mainwindow.cpp \
+		../LisansProjectQT/node.cpp \
+		../LisansProjectQT/anealalgorithm.cpp moc_mainwindow.cpp \
 		moc_openglview.cpp \
 		moc_outershapeuserinput.cpp
 OBJECTS       = main.o \
@@ -72,6 +73,7 @@ OBJECTS       = main.o \
 		outershapeuserinput.o \
 		outershapeinputopengl.o \
 		node.o \
+		anealalgorithm.o \
 		moc_mainwindow.o \
 		moc_openglview.o \
 		moc_outershapeuserinput.o
@@ -261,7 +263,8 @@ DIST          = ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		../LisansProjectQT/projectmanager.h \
 		../LisansProjectQT/outershapeuserinput.h \
 		../LisansProjectQT/outershapeinputopengl.h \
-		../LisansProjectQT/node.h ../LisansProjectQT/main.cpp \
+		../LisansProjectQT/node.h \
+		../LisansProjectQT/anealalgorithm.h ../LisansProjectQT/main.cpp \
 		../LisansProjectQT/mainwindow.cpp \
 		../LisansProjectQT/mesh.cpp \
 		../LisansProjectQT/openglview.cpp \
@@ -271,7 +274,8 @@ DIST          = ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/spec_pre.prf \
 		../LisansProjectQT/projectmanager.cpp \
 		../LisansProjectQT/outershapeuserinput.cpp \
 		../LisansProjectQT/outershapeinputopengl.cpp \
-		../LisansProjectQT/node.cpp
+		../LisansProjectQT/node.cpp \
+		../LisansProjectQT/anealalgorithm.cpp
 QMAKE_TARGET  = LisansProjectQT
 DESTDIR       = 
 TARGET        = LisansProjectQT.app/Contents/MacOS/LisansProjectQT
@@ -677,8 +681,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.8.0/5.8/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.h ../LisansProjectQT/mesh.h ../LisansProjectQT/openglview.h ../LisansProjectQT/openglwidget.h ../LisansProjectQT/outershape.h ../LisansProjectQT/innershape.h ../LisansProjectQT/innershape.h ../LisansProjectQT/projectmanager.h ../LisansProjectQT/outershapeuserinput.h ../LisansProjectQT/outershapeinputopengl.h ../LisansProjectQT/node.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../LisansProjectQT/main.cpp ../LisansProjectQT/mainwindow.cpp ../LisansProjectQT/mesh.cpp ../LisansProjectQT/openglview.cpp ../LisansProjectQT/openglwidget.cpp ../LisansProjectQT/outershape.cpp ../LisansProjectQT/innershape.cpp ../LisansProjectQT/projectmanager.cpp ../LisansProjectQT/outershapeuserinput.cpp ../LisansProjectQT/outershapeinputopengl.cpp ../LisansProjectQT/node.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.h ../LisansProjectQT/mesh.h ../LisansProjectQT/openglview.h ../LisansProjectQT/openglwidget.h ../LisansProjectQT/outershape.h ../LisansProjectQT/innershape.h ../LisansProjectQT/innershape.h ../LisansProjectQT/projectmanager.h ../LisansProjectQT/outershapeuserinput.h ../LisansProjectQT/outershapeinputopengl.h ../LisansProjectQT/node.h ../LisansProjectQT/anealalgorithm.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../LisansProjectQT/main.cpp ../LisansProjectQT/mainwindow.cpp ../LisansProjectQT/mesh.cpp ../LisansProjectQT/openglview.cpp ../LisansProjectQT/openglwidget.cpp ../LisansProjectQT/outershape.cpp ../LisansProjectQT/innershape.cpp ../LisansProjectQT/projectmanager.cpp ../LisansProjectQT/outershapeuserinput.cpp ../LisansProjectQT/outershapeinputopengl.cpp ../LisansProjectQT/node.cpp ../LisansProjectQT/anealalgorithm.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../LisansProjectQT/mainwindow.ui ../LisansProjectQT/openglview.ui ../LisansProjectQT/outershapeuserinput.ui $(DISTDIR)/
 
 
@@ -863,9 +867,7 @@ outershape.o: ../LisansProjectQT/outershape.cpp ../LisansProjectQT/outershape.h 
 		../../../Qt5.8.0/5.8/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o outershape.o ../LisansProjectQT/outershape.cpp
 
-innershape.o: ../LisansProjectQT/innershape.cpp ../LisansProjectQT/innershape.h \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/QMatrix2x2 \
-		../../../Qt5.8.0/5.8/clang_64/lib/QtGui.framework/Headers/qgenericmatrix.h
+innershape.o: ../LisansProjectQT/innershape.cpp ../LisansProjectQT/innershape.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o innershape.o ../LisansProjectQT/innershape.cpp
 
 projectmanager.o: ../LisansProjectQT/projectmanager.cpp ../LisansProjectQT/projectmanager.h \
@@ -914,6 +916,9 @@ outershapeinputopengl.o: ../LisansProjectQT/outershapeinputopengl.cpp ../LisansP
 
 node.o: ../LisansProjectQT/node.cpp ../LisansProjectQT/node.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o node.o ../LisansProjectQT/node.cpp
+
+anealalgorithm.o: ../LisansProjectQT/anealalgorithm.cpp ../LisansProjectQT/anealalgorithm.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o anealalgorithm.o ../LisansProjectQT/anealalgorithm.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

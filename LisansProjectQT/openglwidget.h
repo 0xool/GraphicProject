@@ -25,8 +25,12 @@ protected:
 
 private:
 
-    std::vector<float> dataVector;
-    float testData[60];
+    std::vector<float> outerShapeData;
+
+
+
+
+
 
 };
 
