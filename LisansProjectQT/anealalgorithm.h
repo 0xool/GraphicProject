@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "node.h"
+#include "projectmanager.h"
 
 class AnealAlgorithm
 {
@@ -12,7 +13,9 @@ public:
     void SimulatedAnnealing();
     void SimulatedAnnealingForGraph(Node node);
 
+    std::vector<Node> edgeDetection();
     float badStepChance();
+
 
     std::vector<Node> getGraphAfterAlgorithm();
 
@@ -23,11 +26,7 @@ private:
     float oldCost;
 
     std::vector<Node> graph;
-
-
-
-
-
+    ProjectManager* pm;
 
 };
 

@@ -11,6 +11,7 @@
 #include "projectmanager.h"
 
 #include "outershapeuserinput.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -139,5 +140,33 @@ void MainWindow::on_pushButton_clicked()
     OV.setPalette(pal);
     OV.setModal(true);
     OV.exec();
+
+}
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+
+    ProjectManager *pm;
+    Algorithm algorithm;
+    if (pm->instance().getDebug())
+    {
+        qDebug() << index;
+    }
+
+    switch (index) {
+    case 0:
+        algorithm = GA;
+        pm->instance().setAlgorithm(algorithm);
+        break;
+    case 1:
+        algorithm = SA;
+        pm->instance().setAlgorithm(algorithm);
+        break;
+    default:
+        break;
+    }
+
+
+
 
 }

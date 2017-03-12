@@ -54,19 +54,6 @@ void OpenGlWidget::paintGL()
 {
 
     ProjectManager *pm;
-    glClear(GL_COLOR_BUFFER_BIT);
-
-        glBegin(GL_LINES);
-            glColor3f(1.0, 0.0, 0.0);
-            glVertex2f(-50, -50);
-
-            glVertex2f( 100, 150);
-
-            glVertex2f(0 , 0);
-            glVertex2f( 200,  200);
-        glEnd();
-
-
 
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -81,11 +68,25 @@ void OpenGlWidget::paintGL()
             glDisableClientState(GL_VERTEX_ARRAY);
 
 
+            this->innerShape = pm->instance().getInnserShape();
+            for (std::vector<float> &shape : this->innerShape.getShapes()){
+                if (pm->instance().getDebug())
+                {
 
+                    qDebug() << this->outerShapeData;
+                    qDebug() << shape;
+                }
 
+                float innerShapeTmp[60];
 
+                    glEnableClientState(GL_VERTEX_ARRAY);
+                    glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
+                    std::copy(shape.begin() , shape.end() , innerShapeTmp);
+                    glVertexPointer(2 , GL_FLOAT , 0 , innerShapeTmp);
+                    glDrawArrays(GL_POLYGON , 0 , shape.size() / 2);
+                    glDisableClientState(GL_VERTEX_ARRAY);
 
-            glClear(GL_COLOR_BUFFER_BIT);
+            }
 
                 glEnableClientState(GL_VERTEX_ARRAY);
                 glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
@@ -99,20 +100,20 @@ void OpenGlWidget::paintGL()
 //==========================================================================================================================================
 void OpenGlWidget::mousePressEvent(QMouseEvent *event)
 {
-    int testX = mapFromGlobal(QCursor::pos()).x();
-    int testY = mapFromGlobal(QCursor::pos()).y();
+//    int testX = mapFromGlobal(QCursor::pos()).x();
+//    int testY = mapFromGlobal(QCursor::pos()).y();
 
 
-    this->outerShapeData.push_back(float(testX));
-    this->outerShapeData.push_back(float(testY));
+//    this->outerShapeData.push_back(float(testX));
+//    this->outerShapeData.push_back(float(testY));
 
 
-    qDebug() << testX << "  " << testY;
-    update();
+//    qDebug() << testX << "  " << testY;
+//    update();
 
-    for (float &f : this->outerShapeData){
-        qDebug() << f;
-    }
+//    for (float &f : this->outerShapeData){
+//        qDebug() << f;
+//    }
 
 }
 

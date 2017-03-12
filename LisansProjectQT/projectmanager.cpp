@@ -1,5 +1,7 @@
 #include "projectmanager.h"
 
+
+
 void ProjectManager::setDebug(bool debug)
 {
 
@@ -55,3 +57,16 @@ InnerShape ProjectManager::getInnserShape()
 {
     return this->innerShape;
 }
+//================================================================================================================================================
+Algorithm ProjectManager::getAlgorithm()
+{
+    return this->algorithm;
+}
+//================================================================================================================================================
+void ProjectManager::setAlgorithm(Algorithm algorithm)
+{
+    this->algorithm = algorithm;
+}
+
+
+

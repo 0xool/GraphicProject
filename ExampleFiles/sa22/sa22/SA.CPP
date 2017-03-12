@@ -1586,7 +1586,7 @@ int Perturb(place_t * place, place_t *new_place,float RadiusX, float RadiusY)
 				}
 			}
 		}
-
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Test of being out of polygon region.
 		node_num = tree_nodes_list[i].element;
 		if (node_num != i)

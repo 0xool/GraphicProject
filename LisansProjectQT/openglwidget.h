@@ -8,6 +8,8 @@
 #include <OpenGL/gl.h>
 #include <vector>
 
+#include "innershape.h"
+
 class OpenGlWidget : public QOpenGLWidget
 {
 
@@ -26,11 +28,7 @@ protected:
 private:
 
     std::vector<float> outerShapeData;
-
-
-
-
-
+    InnerShape innerShape;
 
 };
 

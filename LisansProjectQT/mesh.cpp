@@ -5,22 +5,19 @@ Mesh::Mesh()
 
 }
 //=============================================================================================================================
-QMatrix2x2 Mesh::getMeshMatrix()
+void Mesh::addNodeToMesh(Node node)
 {
-
-    return this->meshMatrix;
-
+    this->meshNodeList.push_back(node);
 }
 //=============================================================================================================================
-void Mesh::setMeshMatrix(QMatrix2x2 matrix)
+std::vector<Node> Mesh::getMesh()
 {
-
-    this->meshMatrix = matrix;
-
+    return this->meshNodeList;
 }
 //=============================================================================================================================
-void Mesh::parseMesh(){
-
+void Mesh::setMesh(std::vector<Node> nodes)
+{
+    this->meshNodeList = nodes;
 }
 //=============================================================================================================================
 void Mesh::setMeshText(QString text)
@@ -32,5 +29,4 @@ QString Mesh::getMeshText()
 {
     return this->meshText;
 }
-
 

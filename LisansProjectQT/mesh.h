@@ -1,7 +1,8 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <QMatrix2x2>
+#include <vector>
+#include "node.h"
 #include <QString>
 
 
@@ -12,19 +13,19 @@ public:
 
     Mesh();
 
-    QMatrix2x2 getMeshMatrix();
+    std::vector<Node> getMesh();
     QString getMeshText();
 
-    void setMeshMatrix(QMatrix2x2);
-    void parseMesh();
+    void setMesh(std::vector<Node> nodes);
+    void addNodeToMesh(Node node);
     void setMeshText(QString text);
 
 
 private :
 
+    std::vector<Node> meshNodeList;
     QString meshText;
-    QMatrix2x2 _meshMatrix;
-    QMatrix2x2 meshMatrix;
+
 
 };
 

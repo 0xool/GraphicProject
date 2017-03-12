@@ -6,6 +6,14 @@
 #include "innershape.h"
 #include "outershape.h"
 
+enum Algorithm {
+
+    SA,
+    GA
+
+};
+
+
 //
 //Summary : This class is singleton implemenation of the project only one instance of this class exists only for managing this project
 //
@@ -17,7 +25,10 @@ public:
   bool getDebug();
   Mesh getMesh();
   InnerShape getInnserShape();
+
   OuterShape getOuterShape();
+  Algorithm getAlgorithm();
+
 
   //setter :
   void setDebug(bool debug);
@@ -25,6 +36,7 @@ public:
   void setInnserShape(InnerShape innerShape);
 
   void setOuterShape(OuterShape outerShape);
+  void setAlgorithm(Algorithm algorithm);
 
 
   //singleton implimantation
@@ -39,9 +51,13 @@ private:
   bool DEBUG = false;
   Mesh mesh;
   InnerShape innerShape;
-  OuterShape outerShape;
 
-  ProjectManager() {}
+  OuterShape outerShape;
+  Algorithm algorithm = GA;
+
+  ProjectManager() {
+
+  }
 
 };
 
