@@ -20,7 +20,8 @@ std::vector<Node> AnealAlgorithm::edgeDetection()
 
 
 }
--
+
+
 int areIntersecting(
     float v1x1, float v1y1, float v1x2, float v1y2,
     float v2x1, float v2y1, float v2x2, float v2y2)
