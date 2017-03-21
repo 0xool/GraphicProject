@@ -13,13 +13,17 @@ public:
     AnealAlgorithm();
 
     void SimulatedAnnealing();
-    void SimulatedAnnealingForGraph(Node node);
+    void SimulatedAnnealingForGraph();
     void setManualTempreture(float tempreture);
+    
+    void costEvaluation(Mesh mesh);
 
     std::vector<Node> edgeDetection();
     float badStepChance();
-
     std::vector<Node> getGraphAfterAlgorithm();
+    
+    Mesh generateRandomeSolution();
+    
 
 private:
 
@@ -38,6 +42,8 @@ private:
     std::vector<Node> graph;
     ProjectManager* pm;
     Mesh mesh;
+    
+    Mesh solutionMesh;
 
 };
 
