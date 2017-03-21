@@ -10,7 +10,7 @@ AnealAlgorithm::AnealAlgorithm()
 
 
 }
-
+//=================================================================================================================================
 AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , Mesh mesh)
 {
 
@@ -22,20 +22,29 @@ AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , 
     this->mesh = mesh;
 
 }
-
+//=================================================================================================================================
 void AnealAlgorithm::SimulatedAnnealingForGraph(Node node)
 {
 
+    
+    
+    
 }
-
+//=================================================================================================================================
 std::vector<Node> AnealAlgorithm::edgeDetection()
 {
 
 
 
 }
-
-
+//=================================================================================================================================
+void AnealAlgorithm::costEvaluation(Mesh mesh)
+{
+ 
+    
+    
+}
+//=================================================================================================================================
 int areIntersecting(
     float v1x1, float v1y1, float v1x2, float v1y2,
     float v2x1, float v2y1, float v2x2, float v2y2)
