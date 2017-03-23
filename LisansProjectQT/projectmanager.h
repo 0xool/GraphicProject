@@ -37,7 +37,7 @@ public:
   void setInnserShape(InnerShape innerShape);
 
   void setOuterShape(OuterShape outerShape);
-  void setAlgorithm(Algorithm algorithm);
+  void setAlgorithm(enum Algorithm algorithm);
 
 
   //singleton implimantation
@@ -54,7 +54,7 @@ private:
   InnerShape innerShape;
 
   OuterShape outerShape;
-  Algorithm algorithm = GA;
+  enum Algorithm algorithm = GA;
 
 
   ProjectManager() {

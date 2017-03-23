@@ -72,13 +72,13 @@ Algorithm ProjectManager::getAlgorithm()
 }
 //================================================================================================================================================
 // Set algorithm to be used for implementing graph localozation.
-void ProjectManager::setAlgorithm(Algorithm algorithm)
+void ProjectManager::setAlgorithm(enum Algorithm algorithm)
 {
     this->algorithm = algorithm;
 }
 //================================================================================================================================================
 // Optional Algorithm initilization(propobly wont use this one!!!!).
-void ProjectManager::algorithm()
+void ProjectManager::Algorithm()
 {
 
     switch (this->algorithm) {

@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
 
     ProjectManager *pm;
-    pm->instance().setDebug(false);
+    pm->instance().setDebug(true);
 
     std::vector<float> firstHole = {
 

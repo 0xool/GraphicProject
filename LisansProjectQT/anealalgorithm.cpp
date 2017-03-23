@@ -25,7 +25,7 @@ AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , 
 }
 //=================================================================================================================================
 // For given Node this function will implement and create a new graph based on evaluation and cost.
-void AnealAlgorithm::SimulatedAnnealingForGraph(Node node)
+void AnealAlgorithm::SimulatedAnnealingForGraph()
 {
 
     
@@ -44,9 +44,9 @@ std::vector<Node> AnealAlgorithm::edgeDetection()
 // Cost evaluation for each posible outcome for the SA algorithm
 void AnealAlgorithm::costEvaluation(Mesh mesh)
 {
- 
-    
-    
+
+
+
 }
 //=================================================================================================================================
 // Here we test if the given point do intersect or not(As defined for each output.).
