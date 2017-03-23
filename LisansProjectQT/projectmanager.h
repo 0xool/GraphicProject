@@ -28,6 +28,7 @@ public:
 
   OuterShape getOuterShape();
   Algorithm getAlgorithm();
+  void Algorithm();
 
 
   //setter :
@@ -54,6 +55,7 @@ private:
 
   OuterShape outerShape;
   Algorithm algorithm = GA;
+
 
   ProjectManager() {
 

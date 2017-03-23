@@ -11,6 +11,7 @@ AnealAlgorithm::AnealAlgorithm()
 
 }
 //=================================================================================================================================
+// Initialization for the SA Class.
 AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , Mesh mesh)
 {
 
@@ -23,6 +24,7 @@ AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , 
 
 }
 //=================================================================================================================================
+// For given Node this function will implement and create a new graph based on evaluation and cost.
 void AnealAlgorithm::SimulatedAnnealingForGraph(Node node)
 {
 
@@ -31,6 +33,7 @@ void AnealAlgorithm::SimulatedAnnealingForGraph(Node node)
     
 }
 //=================================================================================================================================
+// Optional behaviour for the class(i will not probably use this one.).
 std::vector<Node> AnealAlgorithm::edgeDetection()
 {
 
@@ -38,6 +41,7 @@ std::vector<Node> AnealAlgorithm::edgeDetection()
 
 }
 //=================================================================================================================================
+// Cost evaluation for each posible outcome for the SA algorithm
 void AnealAlgorithm::costEvaluation(Mesh mesh)
 {
  
@@ -45,6 +49,7 @@ void AnealAlgorithm::costEvaluation(Mesh mesh)
     
 }
 //=================================================================================================================================
+// Here we test if the given point do intersect or not(As defined for each output.).
 int areIntersecting(
     float v1x1, float v1y1, float v1x2, float v1y2,
     float v2x1, float v2y1, float v2x2, float v2y2)

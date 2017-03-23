@@ -127,7 +127,7 @@ void MainWindow::parseMeshData(QString text)
 
 
 }
-
+//================================================================================================================================================
 void MainWindow::on_pushButton_clicked()
 {
 
@@ -142,7 +142,7 @@ void MainWindow::on_pushButton_clicked()
     OV.exec();
 
 }
-
+//================================================================================================================================================
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
 
@@ -165,8 +165,4 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
     default:
         break;
     }
-
-
-
-
 }
