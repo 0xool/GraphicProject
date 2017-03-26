@@ -39,7 +39,6 @@ public:
   void setOuterShape(OuterShape outerShape);
   void setAlgorithm(enum Algorithm algorithm);
 
-
   //singleton implimantation
   static ProjectManager& instance()
   {

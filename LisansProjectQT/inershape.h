@@ -11,5 +11,10 @@ public:
     void setShapes();
 
 };
+private:
+	int test;
+	string tempString; 
+	
+	
 
 #endif // INERSHAPE_H
