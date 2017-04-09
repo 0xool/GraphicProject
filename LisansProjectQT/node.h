@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <QString>
 
 
 
@@ -27,7 +28,7 @@ public:
 
     void setX(int x);
     void setY(int y);
-    void setName(std::string name);
+    void setName(QString name);
 
     //-getter
     std::vector<Node*> getChildNodes();
@@ -39,12 +40,12 @@ public:
     int getX();
 
     int getY();
-    std::string getName();
+    QString getName();
 
 
 private :
 
-    std::string name;
+    QString name;
 
 
 };

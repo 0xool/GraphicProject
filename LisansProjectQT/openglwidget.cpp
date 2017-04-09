@@ -102,30 +102,32 @@ void OpenGlWidget::paintGL()
                 glDisableClientState(GL_VERTEX_ARRAY);
 
 
-//                for (int i = 0 ; i < pm->instance().getMesh().getMesh().size() ; i++)
-//                {
-//                    Node tempNode = pm->instance().getMesh().getMesh()[i];
-//                    qDebug() << tempNode.getChildNodes().size() << "Node child size!!!";
-//                    if (tempNode.getChildNodes().size() > 0)
-//                    {
-//                        for (Node* &node : tempNode.getChildNodes())
-//                        {
-//                            glLineWidth(2.5);
-//                            glColor3f(1.0, 0.0, 0.0);
-//                            glBegin(GL_LINES);
-//                            glVertex3f(node->getX(), node->getY(), 0.0);
-//                            qDebug() << "node X&Y Y:" << node->getX() << "X:" << node->getY() << "for Node name : "  ;
-//                            glVertex3f(tempNode.getX(), tempNode.getY(), 0);
-//                            qDebug() << "tempNode X&Y Y:" << tempNode.getX() << "X:" << tempNode.getY()<< "for Node name : " ;
-//                            glEnd();
-//                        }
-//                    }
+                for (int i = 0 ; i < pm->instance().getMesh().getMeshPointer().size() ; i++)
+                {
+                    Node tempNode = *(pm->instance().getMesh().getMeshPointer()[i]);
+                    qDebug() << tempNode.getChildNodes().size() << "Node child size!!!";
+                    if (tempNode.getChildNodes().size() > 0)
+                    {
+                        for (Node* &node : tempNode.getChildNodes())
+                        {
+                            glLineWidth(2.5);
+                            glColor3f(1.0, 0.0, 0.0);
+                            glBegin(GL_LINES);
 
+                            glVertex3f(node->getX(), node->getY(), 0.0);
+                            glVertex3f(tempNode.getX(), tempNode.getY(), 0);
 
-//                }
+                            if (pm->instance().getDebug() == true)
+                            {
+                                qDebug() << "node X&Y Y:" << node->getX() << "X:" << node->getY()  ;
+                                qDebug( "for Node name : " + node->getName().toLatin1());
+                                qDebug() << "tempNode X&Y Y:" << tempNode.getX() << "X:" << tempNode.getY()<< "for Node name : ";
+                            }
 
-
-
+                            glEnd();
+                        }
+                    }
+                }
 }
 //==========================================================================================================================================
 void OpenGlWidget::mousePressEvent(QMouseEvent *event)

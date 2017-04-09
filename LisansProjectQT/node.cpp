@@ -89,14 +89,14 @@ Node* Node::getTreeParentNode()
 
 }
 //=============================================================================================================================
-std::string Node::getName()
+QString Node::getName()
 {
 
     return this->name;
 
 }
 //=============================================================================================================================
-void Node::setName(std::__1::string name)
+void Node::setName(QString name)
 {
 
     this->name = name;

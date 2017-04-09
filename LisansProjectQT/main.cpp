@@ -21,17 +21,25 @@ int main(int argc, char *argv[])
     bN.setName("B");
     cN.setName("C");
 
+
     aN.addChildNode(&bN);
     aN.addChildNode(&cN);
+
+    Node *temp = &bN;
+
+    temp->setX(1000);
+    temp->setY(1000);
+    cN.setX(1000);
+    cN.setY(1000);
 
     bN.setTreeParentNode(&aN);
     cN.setTreeParentNode(&aN);
 
     Mesh testMesh;
     Node node;
-    testMesh.addNodeToMesh(aN);
-    testMesh.addNodeToMesh(bN);
-    testMesh.addNodeToMesh(cN);
+    testMesh.addNodePointerToMesh(&aN);
+    testMesh.addNodePointerToMesh(&bN);
+    testMesh.addNodePointerToMesh(&cN);
 
     pm->instance().setMesh(testMesh);
 

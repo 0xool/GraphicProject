@@ -10,6 +10,16 @@ void Mesh::addNodeToMesh(Node node)
     this->meshNodeList.push_back(node);
 }
 //=============================================================================================================================
+void Mesh::addNodePointerToMesh(Node* node)
+{
+    this->meshPointerNodeList.push_back(node);
+}
+//=============================================================================================================================
+std::vector<Node*> Mesh::getMeshPointer()
+{
+    return this->meshPointerNodeList;
+}
+//=============================================================================================================================
 std::vector<Node> Mesh::getMesh()
 {
     return this->meshNodeList;

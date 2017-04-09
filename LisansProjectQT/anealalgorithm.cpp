@@ -8,7 +8,9 @@
 AnealAlgorithm::AnealAlgorithm()
 {
 
-    qDebug() << "AA RUNED!!!";
+
+    if (pm->instance().getDebug() == true)
+        qDebug() << "AA RUNED!!!";
 
     this->mesh = pm->instance().getMesh();
     this->xMax = pm->instance().getOuterShape().xMax;
@@ -36,33 +38,39 @@ void AnealAlgorithm::SimulatedAnnealingForGraph()
 
     //first randome state given to choose
     Mesh tempMesh;
-    qDebug() << pm->instance().getMesh().getMesh().size() << "main Mesh size :D";
-    for (int i = 0 ; i < this->mesh.getMesh().size() ; i++)
+    qDebug() << pm->instance().getMesh().getMeshPointer().size() << "main Mesh size :D";
+    for (int i = 0 ; i < this->mesh.getMeshPointer().size() ; i++)
     {
 
-        Node tempNode = this->mesh.getMesh()[i];
+        Node *tempNode = this->mesh.getMeshPointer()[i];
 
         float randomX = rand() % (int)(this->xMax - this->xMin + 1) ;
         float randomY = (rand() % (int)(this->yMax - this->yMin + 1) );
 
-        tempNode.setX(randomX + this->xMin);
-        tempNode.setY(randomY + this->yMin);
+        tempNode->setX(randomX + this->xMin);
+        tempNode->setY(randomY + this->yMin);
 
         if (pm->instance().getDebug() == true)
         {
-            qDebug() << tempNode.getX() << ": tempNode X ";
-            qDebug() << tempNode.getY() << ": tempNode Y";
+            qDebug() << tempNode->getX() << ": tempNode X ";
+            qDebug() << tempNode->getY() << ": tempNode Y ";
         }
 
-        tempMesh.addNodeToMesh(tempNode);
+        tempMesh.addNodePointerToMesh(tempNode);
 
+//        delete tempNode;
 
 
     }
 
     this->meshStates.push_back(tempMesh);
+     qDebug() << tempMesh.getMeshPointer().size() << "Mesh size :D";
     pm->instance().setMesh(tempMesh);
-    qDebug() << pm->instance().getMesh().getMesh().size() << "Mesh size :D";
+
+    if (pm->instance().getDebug() == true)
+    {
+        qDebug() << pm->instance().getMesh().getMesh().size() << "Mesh size :D";
+    }
 
     
     
