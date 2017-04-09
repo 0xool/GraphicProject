@@ -4,12 +4,15 @@
 #include <vector>
 #include "mesh.h"
 #include "node.h"
+
 #include "projectmanager.h"
+#include <stdlib.h>
+
 
 class AnealAlgorithm
 {
 public:
-    AnealAlgorithm(float xMin , float yMin , float xMax , float yMax , Mesh mesh);
+    AnealAlgorithm(float xMin , float yMin , float xMax , float yMax , Mesh mesh , OuterShape outerShape);
     AnealAlgorithm();
 
     void SimulatedAnnealing();
@@ -17,12 +20,15 @@ public:
     void setManualTempreture(float tempreture);
     
     void costEvaluation(Mesh mesh);
+    void inContactWithInnerShape();
+    void setMeshState(std::vector<Mesh> meshes);
 
     std::vector<Node> edgeDetection();
     float badStepChance();
     std::vector<Node> getGraphAfterAlgorithm();
     
     Mesh generateRandomeSolution();
+    std::vector<Mesh> getMeshStates();
     
 
 private:
@@ -44,6 +50,8 @@ private:
     Mesh mesh;
     
     Mesh solutionMesh;
+    OuterShape outerShape;
+    std::vector<Mesh> meshStates;
 
 };
 

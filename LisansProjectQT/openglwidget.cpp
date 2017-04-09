@@ -1,8 +1,10 @@
 #include "openglwidget.h"
 #include "mesh.h"
 #include "projectmanager.h"
+
 #include <QDebug>
 #include <QMouseEvent>
+#include <anealalgorithm.h>
 
 OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
 {
@@ -15,6 +17,9 @@ OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
     pal.setColor(QPalette::Background, Qt::blue);
     this->setAutoFillBackground(true);
     this->setPalette(pal);
+
+    AnealAlgorithm AA;
+    AA.SimulatedAnnealingForGraph();
 
 }
 
@@ -95,6 +100,31 @@ void OpenGlWidget::paintGL()
                 glVertexPointer(2 , GL_FLOAT , 0 , tmp);
                 glDrawArrays(GL_POLYGON , 0 , this->outerShapeData.size() / 2);
                 glDisableClientState(GL_VERTEX_ARRAY);
+
+
+//                for (int i = 0 ; i < pm->instance().getMesh().getMesh().size() ; i++)
+//                {
+//                    Node tempNode = pm->instance().getMesh().getMesh()[i];
+//                    qDebug() << tempNode.getChildNodes().size() << "Node child size!!!";
+//                    if (tempNode.getChildNodes().size() > 0)
+//                    {
+//                        for (Node* &node : tempNode.getChildNodes())
+//                        {
+//                            glLineWidth(2.5);
+//                            glColor3f(1.0, 0.0, 0.0);
+//                            glBegin(GL_LINES);
+//                            glVertex3f(node->getX(), node->getY(), 0.0);
+//                            qDebug() << "node X&Y Y:" << node->getX() << "X:" << node->getY() << "for Node name : "  ;
+//                            glVertex3f(tempNode.getX(), tempNode.getY(), 0);
+//                            qDebug() << "tempNode X&Y Y:" << tempNode.getX() << "X:" << tempNode.getY()<< "for Node name : " ;
+//                            glEnd();
+//                        }
+//                    }
+
+
+//                }
+
+
 
 }
 //==========================================================================================================================================

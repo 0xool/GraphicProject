@@ -1,14 +1,39 @@
+
 #include "mainwindow.h"
 #include <QApplication>
 #include "iostream"
+
 #include "projectmanager.h"
 #include "innershape.h"
+#include "node.h"
 
 int main(int argc, char *argv[])
 {
 
     ProjectManager *pm;
     pm->instance().setDebug(true);
+
+    Node aN;
+    Node bN;
+    Node cN;
+
+    aN.setName("A");
+    bN.setName("B");
+    cN.setName("C");
+
+    aN.addChildNode(&bN);
+    aN.addChildNode(&cN);
+
+    bN.setTreeParentNode(&aN);
+    cN.setTreeParentNode(&aN);
+
+    Mesh testMesh;
+    Node node;
+    testMesh.addNodeToMesh(aN);
+    testMesh.addNodeToMesh(bN);
+    testMesh.addNodeToMesh(cN);
+
+    pm->instance().setMesh(testMesh);
 
     std::vector<float> firstHole = {
 
@@ -60,6 +85,7 @@ int main(int argc, char *argv[])
     IS.addShapeListToInnerShape(fifthHole);
 
     pm->instance().setInnserShape(IS);
+
 
     QApplication a(argc, argv);
     MainWindow w;

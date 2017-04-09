@@ -5,14 +5,14 @@ Node::Node()
 
 }
 //=============================================================================================================================
-Node Node::getChildNodeByIndex(int index)
+Node* Node::getChildNodeByIndex(int index)
 {
 
     return this->childNode[index];
 
 }
 //=============================================================================================================================
-void Node::addChildNode(Node node)
+void Node::addChildNode(Node* node)
 {
 
     this->childNode.push_back(node);
@@ -68,7 +68,7 @@ Node Node::getParentNodeByIndex(int index)
 
 }
 //=============================================================================================================================
-std::vector<Node> Node::getChildNodes()
+std::vector<Node*> Node::getChildNodes()
 {
 
     return this->childNode;
@@ -86,6 +86,20 @@ Node* Node::getTreeParentNode()
 {
 
     return this->treeParentNode;
+
+}
+//=============================================================================================================================
+std::string Node::getName()
+{
+
+    return this->name;
+
+}
+//=============================================================================================================================
+void Node::setName(std::__1::string name)
+{
+
+    this->name = name;
 
 }
 //=============================================================================================================================

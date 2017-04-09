@@ -8,8 +8,12 @@ class OuterShape
 {
 public:
 
-    OuterShape();
+    float xMin;
+    float xMax;
+    float yMin;
+    float yMax;
 
+    OuterShape();
 
     void setShapeMatrix(std::vector<float> shape);
     void setOuterShapeText(QString text);
@@ -21,6 +25,8 @@ private:
 
     QString outerShapeText;
     std::vector<float> shape;
+
+
 
 };
 

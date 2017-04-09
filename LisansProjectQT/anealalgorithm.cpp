@@ -1,4 +1,5 @@
 #include "anealalgorithm.h"
+#include "qdebug.h"
 
 #define NO 0
 #define YES 1
@@ -7,28 +8,62 @@
 AnealAlgorithm::AnealAlgorithm()
 {
 
+    qDebug() << "AA RUNED!!!";
 
+    this->mesh = pm->instance().getMesh();
+    this->xMax = pm->instance().getOuterShape().xMax;
+    this->yMin = pm->instance().getOuterShape().yMin;
+
+    this->xMin = pm->instance().getOuterShape().xMin;
+    this->yMax = pm->instance().getOuterShape().yMax;
 
 }
+
 //=================================================================================================================================
 // Initialization for the SA Class.
-AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , Mesh mesh)
+AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , Mesh mesh , OuterShape outerShape)
 {
 
-    this->xMax = xMax;
-    this->yMin = yMin;
-    this->xMin = xMin;
 
-    this->yMax = yMax;
     this->mesh = mesh;
 
 }
+
 //=================================================================================================================================
 // For given Node this function will implement and create a new graph based on evaluation and cost.
 void AnealAlgorithm::SimulatedAnnealingForGraph()
 {
 
-    
+    //first randome state given to choose
+    Mesh tempMesh;
+    qDebug() << pm->instance().getMesh().getMesh().size() << "main Mesh size :D";
+    for (int i = 0 ; i < this->mesh.getMesh().size() ; i++)
+    {
+
+        Node tempNode = this->mesh.getMesh()[i];
+
+        float randomX = rand() % (int)(this->xMax - this->xMin + 1) ;
+        float randomY = (rand() % (int)(this->yMax - this->yMin + 1) );
+
+        tempNode.setX(randomX + this->xMin);
+        tempNode.setY(randomY + this->yMin);
+
+        if (pm->instance().getDebug() == true)
+        {
+            qDebug() << tempNode.getX() << ": tempNode X ";
+            qDebug() << tempNode.getY() << ": tempNode Y";
+        }
+
+        tempMesh.addNodeToMesh(tempNode);
+
+
+
+    }
+
+    this->meshStates.push_back(tempMesh);
+    pm->instance().setMesh(tempMesh);
+    qDebug() << pm->instance().getMesh().getMesh().size() << "Mesh size :D";
+
     
     
 }
@@ -41,13 +76,8 @@ std::vector<Node> AnealAlgorithm::edgeDetection()
 
 }
 //=================================================================================================================================
-// Cost evaluation for each posible outcome for the SA algorithm
-void AnealAlgorithm::costEvaluation(Mesh mesh)
-{
 
 
-
-}
 //=================================================================================================================================
 // Here we test if the given point do intersect or not(As defined for each output.).
 int areIntersecting(
