@@ -19,6 +19,7 @@ public:
     std::vector<float> getShapeByIndex(int index);
     std::vector<std::vector<float>> getShapes();
 
+
 private:
 
     std::string classMsg;

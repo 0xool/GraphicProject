@@ -1,3 +1,5 @@
+#define POINT_SIZE  4
+
 #include "openglwidget.h"
 #include "mesh.h"
 #include "projectmanager.h"
@@ -6,8 +8,10 @@
 #include <QMouseEvent>
 #include <anealalgorithm.h>
 
+
 OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
 {
+    ProjectManager *pm;
 
     QSurfaceFormat format;
     format.setDepthBufferSize(24);
@@ -17,6 +21,8 @@ OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
     pal.setColor(QPalette::Background, Qt::blue);
     this->setAutoFillBackground(true);
     this->setPalette(pal);
+
+    pm->instance().mainAlgorithmView = this;
 
     AnealAlgorithm AA;
     AA.SimulatedAnnealingForGraph();
@@ -43,23 +49,20 @@ void OpenGlWidget::initializeGL(){
 void OpenGlWidget::resizeGL(int w, int h)
 {
 
-    glViewport(0,0,w,h);
+        glViewport(0,0,w,h);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-//        gluOrtho2D(0, width(), 0, height());
+
         glOrtho(0, w, h, 0, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-//        gluLookAt(0,0,5,0,0,0,0,1,0);
-
 
 }
 //==========================================================================================================================================
 void OpenGlWidget::paintGL()
 {
 
-    ProjectManager *pm;
-
+        ProjectManager *pm;
         glClear(GL_COLOR_BUFFER_BIT);
 
             glEnableClientState(GL_VERTEX_ARRAY);
@@ -105,7 +108,15 @@ void OpenGlWidget::paintGL()
                 for (int i = 0 ; i < pm->instance().getMesh().getMeshPointer().size() ; i++)
                 {
                     Node tempNode = *(pm->instance().getMesh().getMeshPointer()[i]);
-                    qDebug() << tempNode.getChildNodes().size() << "Node child size!!!";
+
+                    glBegin(GL_QUADS);
+                    glColor3f(1.0f,1.0f,1.0f);
+                    glVertex2f(tempNode.getX() + POINT_SIZE / 2  , tempNode.getY() + POINT_SIZE / 2 );
+                    glVertex2f(tempNode.getX() - POINT_SIZE / 2 , tempNode.getY() + POINT_SIZE / 2 );
+                    glVertex2f(tempNode.getX() - POINT_SIZE / 2 , tempNode.getY() - POINT_SIZE / 2);
+                    glVertex2f(tempNode.getX() + POINT_SIZE / 2 , tempNode.getY() - POINT_SIZE / 2);
+                    glEnd();
+
                     if (tempNode.getChildNodes().size() > 0)
                     {
                         for (Node* &node : tempNode.getChildNodes())
@@ -116,6 +127,7 @@ void OpenGlWidget::paintGL()
 
                             glVertex3f(node->getX(), node->getY(), 0.0);
                             glVertex3f(tempNode.getX(), tempNode.getY(), 0);
+
 
                             if (pm->instance().getDebug() == true)
                             {
@@ -146,6 +158,14 @@ void OpenGlWidget::mousePressEvent(QMouseEvent *event)
 //    for (float &f : this->outerShapeData){
 //        qDebug() << f;
 //    }
+
+}
+
+//==========================================================================================================================================
+void OpenGlWidget::updateView()
+{
+
+    update();
 
 }
 

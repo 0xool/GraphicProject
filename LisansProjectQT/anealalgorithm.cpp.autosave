@@ -113,10 +113,6 @@ void AnealAlgorithm::SimulatedAnnealingForGraph()
     {
         qDebug() << pm->instance().getMesh().getMesh().size() << "Mesh size :D";
     }
-
-
-
-    
     
 }
 //=================================================================================================================================
@@ -127,9 +123,6 @@ std::vector<Node> AnealAlgorithm::edgeDetection()
 
 
 }
-//=================================================================================================================================
-
-
 //=================================================================================================================================
 // Here we test if the given point do intersect or not(As defined for each output.).
 int areIntersecting(

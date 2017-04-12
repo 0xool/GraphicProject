@@ -4,7 +4,10 @@
 #include <QString>
 #include "mesh.h"
 #include "innershape.h"
+
 #include "outershape.h"
+#include <functional>
+#include <openglwidget.h>
 
 enum Algorithm {
 
@@ -20,6 +23,8 @@ enum Algorithm {
 class ProjectManager
 {
 public:
+
+    OpenGlWidget* mainAlgorithmView;
 
   //getter :
   bool getDebug();
@@ -45,6 +50,8 @@ public:
     static ProjectManager *instance = new ProjectManager();
     return *instance;
   }
+
+
 
 private:
 

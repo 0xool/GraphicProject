@@ -4,11 +4,13 @@
 #include <QOpenGLWidget>
 #include <QWidget>
 #include <QOpenGLFunctions>
+
 #include <OpenGL/glu.h>
 #include <OpenGL/gl.h>
 #include <vector>
 
 #include "innershape.h"
+
 
 class OpenGlWidget : public QOpenGLWidget
 {
@@ -17,6 +19,7 @@ class OpenGlWidget : public QOpenGLWidget
 public:
     OpenGlWidget(QWidget *parent = 0);
     ~OpenGlWidget();
+    void updateView();
 
 protected:
     void initializeGL();
@@ -24,6 +27,7 @@ protected:
     void paintGL();
 
     void mousePressEvent(QMouseEvent *event);
+
 
 private:
 

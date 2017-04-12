@@ -29,6 +29,9 @@ public:
     
     Mesh generateRandomeSolution();
     std::vector<Mesh> getMeshStates();
+    int calculateIntersectionCost(InnerShape outerShape , Node* destinationNode , Node* startNode);
+
+    bool hasIntersectionWithOuterShape(OuterShape outerShape , Node* destinationNode , Node* startNode);
     
 
 private:
@@ -52,6 +55,8 @@ private:
     Mesh solutionMesh;
     OuterShape outerShape;
     std::vector<Mesh> meshStates;
+
+    InnerShape innerShape;
 
 };
 
