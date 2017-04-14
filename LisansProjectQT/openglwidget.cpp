@@ -8,6 +8,11 @@
 #include <QMouseEvent>
 #include <anealalgorithm.h>
 
+#include <thread>
+
+
+
+
 
 OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
 {
@@ -24,8 +29,6 @@ OpenGlWidget::OpenGlWidget(QWidget *parnet) : QOpenGLWidget(parnet)
 
     pm->instance().mainAlgorithmView = this;
 
-    AnealAlgorithm AA;
-    AA.SimulatedAnnealingForGraph();
 
 }
 
@@ -41,7 +44,16 @@ OpenGlWidget::~OpenGlWidget()
 
 void OpenGlWidget::initializeGL(){
 
+
+    AnealAlgorithm AA;
+    AA.SimulatedAnnealingForGraph();
+
     glClearColor(0,0,0,1);
+
+
+
+
+
 
 }
 //==========================================================================================================================================
@@ -56,6 +68,8 @@ void OpenGlWidget::resizeGL(int w, int h)
         glOrtho(0, w, h, 0, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
+
+
 
 }
 //==========================================================================================================================================
@@ -159,6 +173,9 @@ void OpenGlWidget::mousePressEvent(QMouseEvent *event)
 //        qDebug() << f;
 //    }
 
+    AnealAlgorithm AA;
+    AA.simulatedAnnealingAlgorithm();
+    qDebug() << "fuck me";
 }
 
 //==========================================================================================================================================

@@ -1,13 +1,18 @@
 #include "anealalgorithm.h"
 #include "qdebug.h"
+#include <unistd.h>
+
+#include <thread>
 
 #define NO 0
 #define YES 1
 #define COLLINEAR 2
 
+#define TEMPRETURE 1000
+#define COOLINGRATE 0.003
+
 AnealAlgorithm::AnealAlgorithm()
 {
-
 
     if (pm->instance().getDebug() == true)
         qDebug() << "AA RUNED!!!";
@@ -38,85 +43,93 @@ AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , 
 void AnealAlgorithm::SimulatedAnnealingForGraph()
 {
 
-    //first randome state given to choose
-    Mesh tempMesh;
-    qDebug() << pm->instance().getMesh().getMeshPointer().size() << "main Mesh size :D";
-    for (int i = 0 ; i < this->mesh.getMeshPointer().size() ; i++)
-    {
 
-        Node *tempNode = this->mesh.getMeshPointer()[i];
+            //first randome state given to choose
+            Mesh tempMesh;
+            qDebug() << pm->instance().getMesh().getMeshPointer().size() << "main Mesh size :D";
+            for (int i = 0 ; i < this->mesh.getMeshPointer().size() ; i++)
+            {
 
-        float randomX = rand() % (int)(this->xMax - this->xMin + 1) ;
-        float randomY = (rand() % (int)(this->yMax - this->yMin + 1) );
+                Node *tempNode = this->mesh.getMeshPointer()[i];
 
-        tempNode->setX(randomX + this->xMin);
-        tempNode->setY(randomY + this->yMin);
+                float randomX = rand() % (int)(this->xMax - this->xMin + 1) ;
+                float randomY = rand() % (int)(this->yMax - this->yMin + 1);
 
-        if (pm->instance().getDebug() == true)
-        {
-            qDebug() << tempNode->getX() << ": tempNode X ";
-            qDebug() << tempNode->getY() << ": tempNode Y ";
-        }
+                tempNode->setX(randomX + this->xMin);
+                tempNode->setY(randomY + this->yMin);
 
-        tempMesh.addNodePointerToMesh(tempNode);
-
-
-
-    }
-
-    for (int i = 0 ; i < tempMesh.getMeshPointer().size() ; i++)
-    {
-        Node* tempNode = tempMesh.getMeshPointer()[i];
-
-         qDebug() << "tempMesh size : " << tempMesh.getMeshPointer().size();
-           for (int j = 0 ; j < tempMesh.getMeshPointer().size() ; j++)
-        {
-            std::vector<Node*> nodeVector = tempNode->getChildNodes();
-            Node* testNode = tempMesh.getMeshPointer()[j];
-    //            qDebug() << tempNode->getY() << "WTF :D.";
-            if(std::find(nodeVector.begin(), nodeVector.end(),  testNode) != nodeVector.end()) {
-                // v contains x
                 if (pm->instance().getDebug() == true)
                 {
-                    qDebug() << "contains Element";
-                    qDebug("test node : " + testNode->getName().toLatin1());
-                    qDebug("temp node : " + tempNode->getName().toLatin1());
-
+                    qDebug() << tempNode->getX() << ": tempNode X ";
+                    qDebug() << tempNode->getY() << ": tempNode Y ";
                 }
 
-              int cost = calculateIntersectionCost(innerShape , tempNode , testNode);
-              int currentCost = cost + tempMesh.getCost();
+                tempMesh.addNodePointerToMesh(tempNode);
+            }
 
-              tempMesh.setCost( currentCost );
+            for (int i = 0 ; i < tempMesh.getMeshPointer().size() ; i++)
+            {
+                Node* tempNode = tempMesh.getMeshPointer()[i];
 
-
-            } else {
-                // v does not contain x
-                if (pm->instance().getDebug() == true)
+                 qDebug() << "tempMesh size : " << tempMesh.getMeshPointer().size();
+                   for (int j = 0 ; j < tempMesh.getMeshPointer().size() ; j++)
                 {
-                    qDebug() << "does not contain element";
-                }
+                    std::vector<Node*> nodeVector = tempNode->getChildNodes();
+                    Node* testNode = tempMesh.getMeshPointer()[j];
+            //            qDebug() << tempNode->getY() << "WTF :D.";
+                    if(std::find(nodeVector.begin(), nodeVector.end(),  testNode) != nodeVector.end()) {
+                        // v contains x
+                        if (pm->instance().getDebug() == true)
+                        {
+                            qDebug() << "contains Element";
+                            qDebug("test node : " + testNode->getName().toLatin1());
+                            qDebug("temp node : " + tempNode->getName().toLatin1());
 
+                        }
+
+                      int cost = calculateIntersectionCost(innerShape , tempNode , testNode);
+                      int currentCost = cost + tempMesh.getCost();
+
+                      tempMesh.setCost( currentCost );
+
+
+                    } else {
+                        // v does not contain x
+                        if (pm->instance().getDebug() == true)
+                        {
+                            qDebug() << "does not contain element";
+                        }
+
+
+                    }
+                }
+            }
+
+            qDebug() << "THE MESH COST IS : " << tempMesh.getCost();
+
+            if (tempMesh.getCost() == 0)
+            {
+                if (pm->instance().getDebug() == true)
+                    qDebug() << "Found preMature Answer.";
+                this->haveAnswer = true;
+                pm->instance().setSolutionMesh(tempMesh);
 
             }
-        }
-    }
 
-    qDebug() << "THE MESH COST IS : " << tempMesh.getCost();
-    this->meshStates.push_back(tempMesh);
-    //here we calculate the cost per mesh added
+            this->meshStates.push_back(tempMesh);
+            //here we calculate the cost per mesh added
 
-     qDebug() << tempMesh.getMeshPointer().size() << "Mesh size :D";
-    pm->instance().setMesh(tempMesh);
+             qDebug() << tempMesh.getMeshPointer().size() << "Mesh size :D";
+            pm->instance().setMesh(tempMesh);
 
-    if (pm->instance().getDebug() == true)
-    {
-        qDebug() << pm->instance().getMesh().getMesh().size() << "Mesh size :D";
-    }
+            if (pm->instance().getDebug() == true)
+            {
+                qDebug() << pm->instance().getMesh().getMesh().size() << "Mesh size :D";
+            }
 
+            pm->instance().mainAlgorithmView->update();
 
 
-    
     
 }
 //=================================================================================================================================
@@ -128,8 +141,150 @@ std::vector<Node> AnealAlgorithm::edgeDetection()
 
 }
 //=================================================================================================================================
+float AnealAlgorithm::acceptanceRate(int cost, int newCost, float temp)
+{
+
+    if (newCost < cost){
+        return 1;
+    }else {
+        return exp((cost - newCost) / temp);
+    }
+
+}
+//=================================================================================================================================
+Mesh AnealAlgorithm::simulatedAnnealingAlgorithm()
+{
+
+            // Set initial temp
+            double temp = TEMPRETURE;
+
+            // Cooling rate
+            double coolingRate = COOLINGRATE;
+
+           // Set as current best
+           Mesh currentMesh = pm->instance().getMesh();
+           Mesh bestMesh = currentMesh;
+
+           qDebug() << "Algorithm started.";
+           // Loop until system has cooled
+           while (temp > 1 && !haveAnswer) {
+
+               qDebug() << "TEMPRETURE : " << temp;
+
+               if (bestMesh.getCost() == 0)
+                   break;
+               // Create new neighbour tour
+               Mesh neighborMesh = currentMesh;
 
 
+               // Get a random positions in the tour
+               int currentMeshSize = (int)(currentMesh.getMeshPointer().size()) - 1;
+               int randomNodePosition = rand() % currentMeshSize;
+
+
+               Node *tempNode = neighborMesh.getMeshPointer()[randomNodePosition];
+
+               float randomX = rand() % (int)(this->xMax - this->xMin + 1) ;
+               float randomY = rand() % (int)(this->yMax - this->yMin + 1);
+
+               tempNode->setX(randomX + this->xMin);
+               tempNode->setY(randomY + this->yMin);
+
+               if (pm->instance().getDebug() == true)
+               {
+                   qDebug() << neighborMesh.getMeshPointer()[randomNodePosition]->getX() << ": neighborMesh X ";
+                   qDebug() << neighborMesh.getMeshPointer()[randomNodePosition]->getY() << ": neighborMesh Y ";
+               }
+
+               neighborMesh.setCost(0);
+               for (int i = 0 ; i < neighborMesh.getMeshPointer().size() ; i++)
+               {
+                   Node* tempNode = neighborMesh.getMeshPointer()[i];
+
+                      for (int j = 0 ; j < neighborMesh.getMeshPointer().size() ; j++)
+                   {
+                       std::vector<Node*> nodeVector = tempNode->getChildNodes();
+                       Node* testNode = neighborMesh.getMeshPointer()[j];
+               //            qDebug() << tempNode->getY() << "WTF :D.";
+                       if(std::find(nodeVector.begin(), nodeVector.end(),  testNode) != nodeVector.end()) {
+                           // v contains x
+                           if (pm->instance().getDebug() == true)
+                           {
+                               qDebug() << "contains Element";
+                               qDebug("test node : " + testNode->getName().toLatin1());
+                               qDebug("temp node : " + tempNode->getName().toLatin1());
+
+                           }
+
+                         int cost = calculateIntersectionCost(innerShape , tempNode , testNode);
+                         int currentCost = cost + neighborMesh.getCost();
+
+                         neighborMesh.setCost( currentCost );
+                         {
+                             qDebug() << "Neighbor Cost is :" << neighborMesh.getCost();
+                         }
+
+                       } else {
+                           // v does not contain x
+                           if (pm->instance().getDebug() == true)
+                           {
+                               qDebug() << "does not contain element";
+                           }
+
+
+                       }
+                   }
+               }
+
+               // Get the cities at selected positions in the tour
+
+
+
+               // Swap them
+
+
+
+               // Get energy of solutions
+
+
+               // Decide if we should accept the neighbour
+//               if (acceptanceProbability(currentEnergy, neighbourEnergy, temp) > Math.random()) {
+               if (acceptanceRate(currentMesh.getCost() , neighborMesh.getCost() , temp) > (rand() % 1) && (currentMesh.getCost() != 0))
+               {
+                    currentMesh = neighborMesh;
+               }
+
+
+               pm->instance().setMesh(neighborMesh);
+
+               // Keep track of the best solution found
+               if (currentMesh.getCost() < bestMesh.getCost())
+               {
+                    bestMesh = currentMesh;
+                    if (pm->instance().getDebug() == true)
+                    {
+                        qDebug() << "acceptance section";
+                    }
+                    if (pm->instance().getDebug() == true)
+                    {
+                        qDebug() << "acceptance section";
+                    }
+                    pm->instance().mainAlgorithmView->update();
+                    if (pm->instance().getDebug() == true)
+                    {
+                        qDebug() << "acceptance section";
+                    }
+               }
+
+               // Cool system
+               usleep(700000);
+               temp *= 1 - coolingRate;
+           }
+
+           pm->instance().setMesh(bestMesh);
+           pm->instance().mainAlgorithmView->update();
+           return bestMesh;
+}
 //=================================================================================================================================
 // Here we test if the given point do intersect or not(As defined for each output.).
 int areIntersecting(
@@ -212,10 +367,6 @@ int AnealAlgorithm::calculateIntersectionCost(InnerShape innerShape, Node* desti
         float startNode_X = (float)(startNode->getX());
 
         float startNode_Y = (float)(startNode->getY());
-
-
-
-
 
         for (int j = 0 ; j < innerShape.getShapes().size() ; j++)
         {

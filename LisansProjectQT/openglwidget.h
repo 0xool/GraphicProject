@@ -21,6 +21,8 @@ public:
     ~OpenGlWidget();
     void updateView();
 
+
+
 protected:
     void initializeGL();
     void resizeGL(int w, int h);

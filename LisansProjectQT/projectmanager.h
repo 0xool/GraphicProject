@@ -35,6 +35,8 @@ public:
   Algorithm getAlgorithm();
   void Algorithm();
 
+  Mesh getSolutionMesh();
+
 
   //setter :
   void setDebug(bool debug);
@@ -43,6 +45,7 @@ public:
 
   void setOuterShape(OuterShape outerShape);
   void setAlgorithm(enum Algorithm algorithm);
+  void setSolutionMesh(Mesh mesh);
 
   //singleton implimantation
   static ProjectManager& instance()
@@ -61,7 +64,7 @@ private:
 
   OuterShape outerShape;
   enum Algorithm algorithm = GA;
-
+  Mesh solutionMesh;
 
   ProjectManager() {
 

@@ -7,6 +7,7 @@
 
 #include "projectmanager.h"
 #include <stdlib.h>
+#include <math.h>
 
 
 class AnealAlgorithm
@@ -32,6 +33,8 @@ public:
     int calculateIntersectionCost(InnerShape outerShape , Node* destinationNode , Node* startNode);
 
     bool hasIntersectionWithOuterShape(OuterShape outerShape , Node* destinationNode , Node* startNode);
+    Mesh  simulatedAnnealingAlgorithm();
+    float acceptanceRate(int cost , int newCost , float temp);
     
 
 private:
@@ -57,6 +60,7 @@ private:
     std::vector<Mesh> meshStates;
 
     InnerShape innerShape;
+    bool haveAnswer = false;
 
 };
 
