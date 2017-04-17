@@ -277,7 +277,7 @@ Mesh AnealAlgorithm::simulatedAnnealingAlgorithm()
                }
 
                // Cool system
-               usleep(700000);
+               //usleep();
                temp *= 1 - coolingRate;
            }
 
