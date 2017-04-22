@@ -43,6 +43,35 @@ int main(int argc, char *argv[])
 
     pm->instance().setMesh(testMesh);
 
+    InnerShape IS;
+
+    for (int i = 0 ; i < 25 ; i++)
+    {
+
+        float randomX = rand() % 500;
+        float randomY = rand() % 500;
+        float XMinus = randomX - 20;
+        float Xplus = randomX + 20;
+        float Yminus = randomY - 20;
+        float Yplus = randomY + 20;
+
+
+
+
+        std::vector<float> hole = {
+
+            XMinus , Yminus,
+            Xplus , Yminus,
+            Xplus , Yplus,
+            XMinus , Yplus
+        };
+
+
+        IS.addShapeListToInnerShape(hole);
+
+    }
+
+
     std::vector<float> firstHole = {
 
         10 , 10,
@@ -85,8 +114,7 @@ int main(int argc, char *argv[])
 
     };
 
-    InnerShape IS;
-    IS.addShapeListToInnerShape(firstHole);
+
     IS.addShapeListToInnerShape(secondHole);
     IS.addShapeListToInnerShape(thirdHole);
     IS.addShapeListToInnerShape(forthHole);

@@ -235,18 +235,6 @@ Mesh AnealAlgorithm::simulatedAnnealingAlgorithm()
                        }
                    }
                }
-
-               // Get the cities at selected positions in the tour
-
-
-
-               // Swap them
-
-
-
-               // Get energy of solutions
-
-
                // Decide if we should accept the neighbour
 //               if (acceptanceProbability(currentEnergy, neighbourEnergy, temp) > Math.random()) {
                if (acceptanceRate(currentMesh.getCost() , neighborMesh.getCost() , temp) > (rand() % 1) && (currentMesh.getCost() != 0))
