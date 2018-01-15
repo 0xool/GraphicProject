@@ -35,6 +35,8 @@ public:
     bool hasIntersectionWithOuterShape(OuterShape outerShape , Node* destinationNode , Node* startNode);
     Mesh  simulatedAnnealingAlgorithm();
     float acceptanceRate(int cost , int newCost , float temp);
+
+    int inOrOut (OuterShape outerShape, Node *destinationNode);
     
 
 private:

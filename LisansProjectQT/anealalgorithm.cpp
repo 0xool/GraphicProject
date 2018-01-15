@@ -33,7 +33,6 @@ AnealAlgorithm::AnealAlgorithm()
 AnealAlgorithm::AnealAlgorithm(float xMin, float yMin, float xMax, float yMax , Mesh mesh , OuterShape outerShape)
 {
 
-
     this->mesh = mesh;
 
 }
@@ -164,6 +163,12 @@ Mesh AnealAlgorithm::simulatedAnnealingAlgorithm()
            // Set as current best
            Mesh currentMesh = pm->instance().getMesh();
            Mesh bestMesh = currentMesh;
+
+           for (int h = 0; h < 3; h++){
+                qDebug() << "MOTHERFUCKER" ;
+               Node *thisNode = bestMesh.getMeshPointer()[h];
+               qDebug() << "ANSWER IS HERE:" << this->inOrOut(pm->instance().getOuterShape() , thisNode);
+           }
 
            qDebug() << "Algorithm started.";
            // Loop until system has cooled
@@ -586,9 +591,68 @@ bool AnealAlgorithm::hasIntersectionWithOuterShape(OuterShape outerShape, Node *
 
     return false;
 }
+//=================================
+//int cn_PnPoly( Point P, Point* V, int n )
+//{
+//    int    cn = 0;    // the  crossing number counter
+
+//    // loop through all edges of the polygon
+//    for (int i=0; i<n; i++) {    // edge from V[i]  to V[i+1]
+//       if (((V[i].y <= P.y) && (V[i+1].y > P.y))     // an upward crossing
+//        || ((V[i].y > P.y) && (V[i+1].y <=  P.y))) { // a downward crossing
+//            // compute  the actual edge-ray intersect x-coordinate
+//            float vt = (float)(P.y  - V[i].y) / (V[i+1].y - V[i].y);
+//            if (P.x <  V[i].x + vt * (V[i+1].x - V[i].x)) // P.x < intersect
+//                 ++cn;   // a valid crossing of y=P.y right of P.x
+//        }
+//    }
+//    return (cn&1);    // 0 if even (out), and 1 if  odd (in)
+
+//}
+//here we check whetherthe point(in this function node) is inside the polygon or not
+int AnealAlgorithm::inOrOut (OuterShape outerShape, Node *destinationNode) {
+    qDebug() << "MOTHERFUCKER" ;
+    int cn = 0;
+    std::vector<float> shapes = outerShape.getShapeMatrix();
 
 
+    for (int i = 0 ; i <= shapes.size() - 2  ; i = i + 2 ) {
 
+            float firstX = shapes[i];
+            float firstY = shapes[i+1];
+
+            float secondX;
+            float secondY;
+            if (i == shapes.size() - 2){
+                secondX = shapes[0];
+                secondY = shapes[1];
+            }else{
+                secondX = shapes[i+2];
+                secondY = shapes[i+3];
+            }
+            qDebug() << "THE X IS :" << firstX;
+            qDebug() << "THE second X IS:" << secondX;
+            qDebug() << "THE Node X IS:" << destinationNode->getX();
+
+
+            if ((firstY <= destinationNode->getY()) && (secondY > destinationNode->getY())
+                    || (firstY > destinationNode->getY()) && (secondY <= destinationNode->getY())) {
+
+                // compute  the actual edge-ray intersect x-coordinate
+                float vt = (float)(destinationNode->getY()  - firstY) / (secondY - firstY);
+                            if (destinationNode->getX() <  firstX + vt * (secondX - firstX)) // P.x < intersect
+                                 ++cn;
+
+        }
+
+    }
+
+        qDebug() << "the name" << destinationNode->getName();
+        qDebug() << "IMPORTANT FOR NOW :D" << cn;
+
+
+   return (cn&1);
+}
 
 
 
