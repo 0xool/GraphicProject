@@ -1,1 +1,0 @@
-Result of OUR Algorithm for tree rec2t255.out : 	init_time= 0 , run_time= 3167751 , total_crossings= 108 , 	total_edge_len= 10438.823242 , max_edge_len= 288.174255 , edge_len_deviation= 39.912323 , 	mean_edge_len= 41.097729 , total_bends= 6 , max_bends= 3 , 	bends_deviation= 0.266207 , mean_bends= 0.000000 , min_dist= 0.000000 

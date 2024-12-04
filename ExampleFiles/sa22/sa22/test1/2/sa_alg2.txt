@@ -1,1 +1,0 @@
-Result of SA Algorithm for tree rec2_t63.ttt : 	init_time= 0 , run_time= 53041 , total_crossings= 8 , 	total_edge_len= 4023.849365 , max_edge_len= 302.134064 , edge_len_deviation= 63.910843 , 	mean_edge_len= 64.900795 , total_bends= 0 , max_bends= 0 , 	bends_deviation= 0.000000 , mean_bends= 0.000000 , min_dist= 9.055386 

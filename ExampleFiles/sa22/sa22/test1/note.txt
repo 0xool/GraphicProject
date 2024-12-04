@@ -1,4 +1,0 @@
-This tests are done within recti2-2.eps
-and by tree_06, tree_07, tree_10, tree_15, 
-tree_31, tree_63, tree_127, tree_255
-
